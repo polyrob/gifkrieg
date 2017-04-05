@@ -25,6 +25,7 @@ public class MainController {
         if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
             log.info("User is logged in.");
             model.addAttribute("username", auth.getName());
+
         } else {
             log.info("User NOT logged in.");
         }
