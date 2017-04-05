@@ -2,6 +2,12 @@ body{
     padding:50px;
 }
 
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
