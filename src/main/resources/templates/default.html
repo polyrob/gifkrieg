@@ -30,15 +30,13 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
-                <li><a href="#contact">Leaderboard</a></li>
-                <li th:if="${roles.empty}"><a href="/">EMPTY</a></li>
-                <li th:if="${user}"><a href="/">USER</a></li>
-                <li th:if="${roles}"><a href="/">Your GIFs</a></li>
-                <li sec:authorize="hasAuthority('ROLE_USER')"><a href="/">Your Stats</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/">Admin</a></li>
+                <li><a href="#leaderboard">Leaderboard</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><p class="navbar-text">Already have an account?</p></li>-->
+                <li sec:authorize="hasAuthority('ROLE_USER')"><a href="/">Your GIFs</a></li>
+                <li sec:authorize="hasAuthority('ROLE_USER')"><a href="/">Your Stats</a></li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/">Admin</a></li>
                 <li class="dropdown" th:if="${username == null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
