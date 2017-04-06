@@ -1,11 +1,11 @@
 package com.gifkrieg.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.gifkrieg.model.User;
 import com.gifkrieg.service.SecurityService;
 import com.gifkrieg.service.UserService;
 import com.gifkrieg.validator.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +49,7 @@ public class UserController {
             return "registration";
         }
 
-        userService.saveUser(userForm);
+        userService.saveNewUser(userForm);
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
         return "redirect:/";
@@ -59,9 +59,6 @@ public class UserController {
     public String login(Model model, String error, String logout) {
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
     }

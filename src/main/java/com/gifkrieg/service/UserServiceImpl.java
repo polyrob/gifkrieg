@@ -1,9 +1,6 @@
 package com.gifkrieg.service;
 
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import com.gifkrieg.data.RoleRepository;
 import com.gifkrieg.data.UserRepository;
 import com.gifkrieg.model.Role;
@@ -13,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Created by Rob on 4/2/2017.
@@ -29,10 +29,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     @Override
-    public void saveUser(User user) {
+    public void saveNewUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        Role userRole = roleRepository.findByRole("ROLE_USER");
+        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
 

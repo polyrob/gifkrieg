@@ -8,7 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Rob on 4/2/2017.
@@ -19,7 +20,7 @@ public class MainController {
     Logger log = LoggerFactory.getLogger("MainController");
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
@@ -30,7 +31,12 @@ public class MainController {
             log.info("User NOT logged in.");
         }
 
+        log.info("User is authenticated: " + auth.isAuthenticated());
+        log.info("User is auth name: " + auth.getName());
 
+        model.addAttribute("roles", auth.getAuthorities());
+        model.addAttribute("ROLE_USER");
+        log.info(auth.getAuthorities().toString());
         return "index";
     }
 }

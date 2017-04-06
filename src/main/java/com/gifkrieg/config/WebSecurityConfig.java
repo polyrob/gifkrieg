@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 /**
  * Created by Rob on 4/2/2017.
  */
@@ -29,25 +30,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration", "/login").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers("/", "/registration", "/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .usernameParameter("username")
-
-                    .permitAll()
-                    .and()
+                .loginPage("/login")
+                .permitAll()
+                .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true)
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
                 .permitAll();
     }
 
     @Override
     public void configure(WebSecurity security) {
-        security.ignoring().antMatchers("/css/**","/fonts/**","/libs/**");
+        security.ignoring().antMatchers("/resources/**", "/css/**", "/fonts/**", "/libs/**");
     }
 
     @Autowired
