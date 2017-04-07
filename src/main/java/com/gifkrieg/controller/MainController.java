@@ -1,6 +1,7 @@
 package com.gifkrieg.controller;
 
 import com.gifkrieg.service.ChallengeService;
+import com.gifkrieg.service.GifService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class MainController {
     @Autowired
     private ChallengeService challengeService;
 
+    @Autowired
+    private GifService gifService;
+
+
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -38,9 +43,8 @@ public class MainController {
 
         model.addAttribute("currentChallenges", challengeService.getCurrentAndPastChallenges(1));
 
-        model.addAttribute("roles", auth.getAuthorities());
-        model.addAttribute("ROLE_USER");
-        log.info(auth.getAuthorities().toString());
+        model.addAttribute("gifs", gifService.getAllGifs());
+
         return "index";
     }
 }

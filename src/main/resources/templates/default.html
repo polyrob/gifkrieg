@@ -117,7 +117,15 @@
 <div class="navbar navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-header">
-            <span th:text="${roles}">UNKNOWN ROLE</span>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                You are an administrator
+            </div>
+            <div sec:authorize="hasRole('ROLE_USER')">
+                You are a user
+            </div>
+            <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                You are anonymous
+            </div>
         </div>
     </div>
 </div>

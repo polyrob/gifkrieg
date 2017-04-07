@@ -10,22 +10,27 @@ springsecurity3">
 <div layout:fragment="content">
     <h1>Hello world for index!</h1>
 
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        You are an administrator
-    </div>
-    <div sec:authorize="hasRole('ROLE_USER')">
-        You are a user
-    </div>
-    <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
-        You are anonymous
-    </div>
 
-    <table>
+
+    <table class="table table-bordered">
+        <thead>
+        <td>id</td><td>Challenge</td>
+        </thead>
+        <tbody>
         <tr th:each="challenge : ${currentChallenges}">
             <td th:text="${challenge.id}"></td>
             <td th:text="${challenge.cardText}"></td>
         </tr>
+        </tbody>
     </table>
+
+    <div class="row" th:each="gif : ${gifs}">
+        <div class="col-xs-6 col-md-4">
+            <img th:src="${gif.url}" />
+        </div>
+    </div>
+
+
 
 </div>
 </body>
