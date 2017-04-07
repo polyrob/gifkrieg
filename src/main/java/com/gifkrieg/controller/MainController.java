@@ -1,7 +1,9 @@
 package com.gifkrieg.controller;
 
+import com.gifkrieg.service.ChallengeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +19,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MainController {
 
-    Logger log = LoggerFactory.getLogger("MainController");
+    private Logger log = LoggerFactory.getLogger(getClass().getName());
+
+    @Autowired
+    private ChallengeService challengeService;
 
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
@@ -31,8 +36,7 @@ public class MainController {
             log.info("User NOT logged in.");
         }
 
-        log.info("User is authenticated: " + auth.isAuthenticated());
-        log.info("User is auth name: " + auth.getName());
+        model.addAttribute("currentChallenges", challengeService.getCurrentAndPastChallenges(1));
 
         model.addAttribute("roles", auth.getAuthorities());
         model.addAttribute("ROLE_USER");

@@ -19,6 +19,14 @@ springsecurity3">
     <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
         You are anonymous
     </div>
+
+    <table>
+        <tr th:each="challenge : ${currentChallenges}">
+            <td th:text="${challenge.id}"></td>
+            <td th:text="${challenge.cardText}"></td>
+        </tr>
+    </table>
+
 </div>
 </body>
 </html>

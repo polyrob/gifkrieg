@@ -20,7 +20,8 @@ public class User {
     private String email;
     private String password;
     private String username;
-    private int active;
+    @Enumerated(EnumType.ORDINAL)
+    private State active;
     private String passwordConfirm;
     private Set<Role> roles;
 
@@ -58,11 +59,11 @@ public class User {
         this.email = email;
     }
 
-    public int getActive() {
+    public State getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(State active) {
         this.active = active;
     }
 
