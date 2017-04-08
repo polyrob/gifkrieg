@@ -19,7 +19,7 @@ targetCompatibility = 1.8
 
 jar {
     baseName = 'gifkrieg-app'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 
@@ -28,14 +28,12 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile('org.springframework.boot:spring-boot-starter-data-redis')
     compile('org.springframework.session:spring-session')
     compile("org.springframework.boot:spring-boot-devtools")
-
-    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
 
     runtime("mysql:mysql-connector-java")
 

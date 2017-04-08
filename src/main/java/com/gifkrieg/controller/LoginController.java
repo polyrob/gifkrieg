@@ -13,13 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 /**
  * Created by robbie on 4/4/17.
  */
 
-@Controller
+@RestController
 public class LoginController {
     Logger log = LoggerFactory.getLogger(getClass().getName());
 
@@ -74,12 +77,18 @@ public class LoginController {
         return "regsuccess";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String login(Model model, String error, String logout) {
+//        if (error != null)
+//            model.addAttribute("error", "Your username and password is invalid.");
+//
+//        return "login";
+//    }
 
-        return "login";
+    @RequestMapping("/user")
+    public Principal user(Principal user) {
+        log.info("user() called in LoginController.");
+        return user;
     }
 
 }
