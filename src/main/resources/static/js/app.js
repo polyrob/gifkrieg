@@ -33,10 +33,12 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 							+ btoa(credentials.username + ":"
 									+ credentials.password)
 				} : {};
+				console.log(headers);
                 console.log("Doing get in authenticate()")
 				$http.get('user', {
 					headers : headers
 				}).then(function(response) {
+				    console.log(response);
 					if (response.data.name) {
 						$rootScope.authenticated = true;
 					} else {
@@ -50,7 +52,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 
 			}
 
-//			authenticate();
+			authenticate();
 
 			self.credentials = {};
 			self.login = function() {
@@ -76,7 +78,8 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 				});
 			}
 
-		}).controller('home', function($http) {
+
+    }).controller('home', function($http) {
 	var self = this;
 	$http.get('/resource/').then(function(response) {
 		self.greeting = response.data;

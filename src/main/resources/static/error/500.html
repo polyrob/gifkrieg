@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-      layout:decorator="default" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-
-springsecurity3">
+<html>
 <head>
     <title>Gifkrieg</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div layout:fragment="content">
+<div>
     <div class="jumbotron">
         <div class="text-center">
             <h1>Oh, fuck!</h1>
@@ -16,7 +15,6 @@ springsecurity3">
         </div>
 
     </div>
-    <span th:text="${error}"></span>
 </div>
 </body>
 </html>
