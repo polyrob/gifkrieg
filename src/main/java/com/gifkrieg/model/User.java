@@ -18,12 +18,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "user")
 public class User {
 
+
     private int id;
     private String username;
     private String email;
     private String password;
     @Enumerated(EnumType.ORDINAL)
     private State active;
+    private int inventorySize;
     private String passwordConfirm;
     private Set<Role> roles;
 
@@ -88,4 +90,12 @@ public class User {
         this.roles = roles;
     }
 
+    @Column(name = "inventorySize", columnDefinition="INT NOT NULL DEFAULT 3")
+    public int getInventorySize() {
+        return inventorySize;
+    }
+
+    public void setInventorySize(int inventorySize) {
+        this.inventorySize = inventorySize;
+    }
 }

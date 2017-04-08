@@ -11,16 +11,19 @@ import java.time.LocalDateTime;
 @Table(name = "challenge")
 public class Challenge {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Enumerated(EnumType.ORDINAL)
     private State state;
     private String cardText;
+    @Column(name = "submissions", columnDefinition="INT NOT NULL DEFAULT 0")
+    private int submissions;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     public int getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class Challenge {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public int getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(int submissions) {
+        this.submissions = submissions;
     }
 }

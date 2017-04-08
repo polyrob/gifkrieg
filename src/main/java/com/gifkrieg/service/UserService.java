@@ -9,4 +9,6 @@ public interface UserService {
     public User findByUsername(String email);
 
     public void saveNewUser(User user);
+
+    public void acquireStarterGifs(User user);
 }

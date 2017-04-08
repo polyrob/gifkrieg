@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-
 /**
  * Created by robbie on 4/4/17.
  */
@@ -58,10 +56,14 @@ public class UserController {
             return "register";
         }
 
+        // Success! Save the user
         userService.saveNewUser(userForm);
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
+        // get starting gifs
+        userService.acquireStarterGifs(userForm);
 
+        model.addAttribute("test", "yes it does");
 
         return "redirect:/regsuccess";
     }
