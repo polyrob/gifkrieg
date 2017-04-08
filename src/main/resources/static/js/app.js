@@ -52,7 +52,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 
 			}
 
-			authenticate();
+//			authenticate();
 
 			self.credentials = {};
 			self.login = function() {
@@ -81,7 +81,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 
     }).controller('home', function($http) {
 	var self = this;
-	$http.get('/resource/').then(function(response) {
-		self.greeting = response.data;
-	})
+//	$http.get('/resource/').then(function(response) {
+//		self.greeting = response.data;
+//	})
 });

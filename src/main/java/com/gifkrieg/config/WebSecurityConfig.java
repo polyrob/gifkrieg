@@ -50,17 +50,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .formLogin().and()
                 .logout().and()
                 .authorizeRequests()
-                .antMatchers("/", "/login.html", "/testpage.html", "/leaderboard.html", "/home.html", "user").permitAll() // #4
+                .antMatchers("/", "/login.html", "logout", "/testpage.html", "/leaderboard.html", "/home.html", "user").permitAll() // #4
                 //.antMatchers("/api/**").hasRole("USER") // #6
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic().and()
-                .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                .httpBasic();
 
 //                .formLogin()  // #8
 //                .loginPage("/login") // #9
