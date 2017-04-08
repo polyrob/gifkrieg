@@ -4,6 +4,7 @@ package com.gifkrieg.service;
 import com.gifkrieg.data.RoleRepository;
 import com.gifkrieg.data.UserRepository;
 import com.gifkrieg.model.Role;
+import com.gifkrieg.model.State;
 import com.gifkrieg.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Role userRole = roleRepository.findByRole("ROLE_USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        user.setActive(State.ACTIVE);
         userRepository.save(user);
     }
 

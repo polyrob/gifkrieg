@@ -26,7 +26,7 @@ springsecurity3">
 
     <div class="row" th:each="gif : ${gifs}">
         <div class="col-xs-6 col-md-4">
-            <img th:src="${gif.url}" />
+            <img th:src="${gif.url}" max-width="200px" />
         </div>
     </div>
 
