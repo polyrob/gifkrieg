@@ -43,10 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers("/resources/**", "/js/**", "/css/**", "/img/**", "/fonts/**", "/libs/**");
-//    }
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/resources/**", "/js/**", "/css/**", "/img/**", "/fonts/**", "/libs/**");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
