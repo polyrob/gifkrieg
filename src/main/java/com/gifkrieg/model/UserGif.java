@@ -14,6 +14,9 @@ public class UserGif {
     private int userId;
     private int gifId;
 
+    public UserGif() {
+    }
+
     public UserGif(int userId, int gifId) {
         this.userId = userId;
         this.gifId = gifId;

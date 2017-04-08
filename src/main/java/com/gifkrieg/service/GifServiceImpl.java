@@ -25,4 +25,6 @@ public class GifServiceImpl implements GifService {
     public List<Gif> getAllGifs() {
         return gifRepository.findAll();
     }
+
+
 }

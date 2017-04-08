@@ -1,6 +1,7 @@
 package com.gifkrieg.config;
 
 
+import com.gifkrieg.handler.AuthSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 /**
@@ -24,6 +26,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() { return new AuthSuccessHandler();}
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -40,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").successHandler(authenticationSuccessHandler())
                 .permitAll()
                 .and()
                 .logout()
@@ -52,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity security) {
-        security.ignoring().antMatchers("/resources/**", "/css/**", "/fonts/**", "/libs/**");
+        security.ignoring().antMatchers("/resources/**", "/css/**", "/img/**", "/fonts/**", "/libs/**");
     }
 
     @Autowired

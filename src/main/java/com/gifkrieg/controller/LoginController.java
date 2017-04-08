@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-public class UserController {
+public class LoginController {
     Logger log = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired

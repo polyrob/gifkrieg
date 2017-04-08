@@ -1,6 +1,7 @@
 package com.gifkrieg.service;
 
 import com.gifkrieg.data.UserRepository;
+import com.gifkrieg.model.GKUserDetails;
 import com.gifkrieg.model.Role;
 import com.gifkrieg.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         for (Role role : user.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
-
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        GKUserDetails ud = new GKUserDetails(user.getUsername(), user.getPassword(), grantedAuthorities);
+        ud.setUserId(user.getId());
+        return ud;
     }
 }

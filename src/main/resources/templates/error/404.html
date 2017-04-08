@@ -9,22 +9,14 @@ springsecurity3">
 <body>
 <div layout:fragment="content">
     <div class="jumbotron">
-        <h1>Willkommen!</h1>
-        <p>Welcome to Gifkrieg. Let the games begin</p>
-    </div>
-
-    <div>
-        <h2>Here are your starting GIFs</h2>
-    </div>
-
-
-    <div class="row">
-        <div class="col-xs-6 col-md-4" th:each="gif : ${gifs}">
-            <img th:src="${gif.url}" class="gif-box" />
+        <div class="text-center">
+            <h1>Not Found</h1>
+            <img src="http://www.reactiongifs.com/wp-content/uploads/2012/11/joey-not-even-sorry.gif"/>
+            <p>We couldn't find whatever you were looking for.</p>
         </div>
+
     </div>
-
-
+    <span th:text="${error}"></span>
 </div>
 </body>
 </html>
