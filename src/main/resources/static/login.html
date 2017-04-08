@@ -1,6 +1,14 @@
-<div class="alert alert-danger" ng-show="error">
-    There was a problem logging in. Please try again.
+<div class="jumbotron">
+    <div class="text-center">
+        <h1>Log in</h1>
+    </div>
 </div>
+
+<div class="alert alert-danger" ng-if="errorMessage">
+    {{ errorMessage }}
+</div>
+
+
 <form role="form" ng-submit="controller.login()">
     <div class="form-group">
         <label for="username">Username:</label> <input type="text"

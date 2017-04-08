@@ -10,7 +10,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 		controllerAs: 'controller'
 	}).when('/leaderboard', {
         templateUrl : 'leaderboard.html',
-        controller : 'navigation',
+        controller : 'leaderboard',
         controllerAs: 'controller'
     }).otherwise('/');
 
@@ -19,6 +19,14 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 }).controller('navigation',
 
 		function($rootScope, $http, $location, $route) {
+
+            $rootScope.errors = [];
+            $rootScope.hasError = false;
+
+
+            $rootScope.closeAlert = function (index) {
+                $scope.errors.splice(index, 1);
+            }
 
 			var self = this;
 
@@ -41,6 +49,8 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 				    console.log(response);
 					if (response.data.name) {
 						$rootScope.authenticated = true;
+						$rootScope.username = response.data.name;
+						$rootScope.authorities = response.data.authorities;
 					} else {
 						$rootScope.authenticated = false;
 					}
@@ -52,7 +62,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 
 			}
 
-//			authenticate();
+			authenticate();
 
 			self.credentials = {};
 			self.login = function() {
@@ -66,6 +76,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 						console.log("Login failed")
 						$location.path("/login");
 						self.error = true;
+						$rootScope.errorMessage = 'Logon failed. Please check your username/password.';
 						$rootScope.authenticated = false;
 					}
 				})
@@ -74,6 +85,8 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 			self.logout = function() {
 				$http.post('logout', {}).finally(function() {
 					$rootScope.authenticated = false;
+					$rootScope.username = null;
+					$rootScope.authorities = null;
 					$location.path("/");
 				});
 			}
@@ -84,4 +97,10 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 //	$http.get('/resource/').then(function(response) {
 //		self.greeting = response.data;
 //	})
+}).controller('leaderboard', function($http) {
+    var self = this;
+    console.log('leaderboard controller...');
+	$http.get('/api/leaderboard').then(function(response) {
+		self.data = response.data;
+	})
 });
