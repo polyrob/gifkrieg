@@ -39,6 +39,11 @@ public class UserController {
         log.info("Requested registration page.");
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
+
+        // Set below just to ease development
+        user.setUsername("userX");
+        user.setEmail("test@aol.com");
+
         modelAndView.addObject("userForm", user);
         modelAndView.setViewName("register");
         return modelAndView;
@@ -58,7 +63,13 @@ public class UserController {
 
 
 
-        return "redirect:/register_success";
+        return "redirect:/regsuccess";
+    }
+
+    @RequestMapping(value = "/regsuccess")
+    public String registerSuccess(Model model, String error, String logout) {
+        log.info("Registration success method.");
+        return "regsuccess";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

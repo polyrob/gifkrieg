@@ -7,10 +7,16 @@ springsecurity3">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div layout:fragment="content" class="jumbotron">
+<div layout:fragment="content">
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>Oh, fuck!</h1>
+            <img src="http://www.reactiongifs.com/r/lolof1.gif"/>
+            <p>Something has gone very, very wrong.</p>
+        </div>
 
-    <h1>Oh, fuck.</h1>
-    <p>Something has gone very, very wrong.</p>
+    </div>
+    <span th:text="${error}"></span>
 </div>
 </body>
 </html>
