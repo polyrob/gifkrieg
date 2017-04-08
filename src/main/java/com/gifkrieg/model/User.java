@@ -3,6 +3,8 @@ package com.gifkrieg.model;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -17,9 +19,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User {
 
     private int id;
+    private String username;
     private String email;
     private String password;
-    private String username;
     @Enumerated(EnumType.ORDINAL)
     private State active;
     private String passwordConfirm;

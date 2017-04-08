@@ -8,6 +8,10 @@ body{
     width: 100%;
 }
 
+.gif-box {
+    max-width: 200px;
+}
+
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
