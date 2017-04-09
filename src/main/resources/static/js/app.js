@@ -21,12 +21,14 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-}).controller('navigation', function ($rootScope, $route, $http, $location) {
+}).controller('navigation', function ($rootScope, $scope, $route, $http, $location) {
     console.log("Navigation controller...");
     var self = this;
 
     $rootScope.errors = [];
     $rootScope.hasError = false;
+    
+    $rootScope.userGifs = [{"url": "http://www.reactiongifs.com/wp-content/uploads/2013/11/trre.gif"},{"url": "http://www.reactiongifs.com/r/somg.gif"}];
 
 
     $rootScope.closeAlert = function (index) {
@@ -36,7 +38,6 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
     self.tab = function (route) {
         return $route.current && route === $route.current.controller;
     };
-
 
     var authenticate = function (credentials, callback) {
 
@@ -55,6 +56,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
                 $rootScope.authenticated = true;
                 $rootScope.username = response.data.name;
                 $rootScope.authorities = response.data.authorities;
+                $rootScope.userId = response.data.principal.userId;
             } else {
                 $rootScope.authenticated = false;
             }
@@ -131,9 +133,17 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
 }).controller('home', function ($http) {
     var self = this;
-    //	$http.get('/resource/').then(function(response) {
-    //		self.greeting = response.data;
-    //	})
+    $http.get('/pub/challenge').then(function (response) {
+        self.current = response.data.current;
+        self.past = response.data.past;
+
+        self.current.startTime = getDisplayDateTimeForEpoch(self.current.startTime);
+        self.current.endTime = getDisplayDateTimeForEpoch(self.current.endTime);
+        self.past.forEach(function (challenge) {
+            challenge.startTime = getDisplayDateTimeForEpoch(challenge.startTime);
+            challenge.endTime = getDisplayDateTimeForEpoch(challenge.endTime);
+        });
+    })
 
 }).controller('leaderboard', function ($http) {
     var self = this;
@@ -142,3 +152,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
         self.data = response.data;
     })
 });
+
+var getDisplayDateTimeForEpoch = function (epoch) {
+    return new Date(epoch).toDateString();
+};

@@ -1,8 +1,59 @@
-<h1>Greeting</h1>
-<div ng-show="authenticated">
-    <p>The ID is {{controller.greeting.id}}</p>
-    <p>The content is {{controller.greeting.content}}</p>
-</div>
-<div ng-show="!authenticated">
-    <p>Login to see your greeting</p>
+<div class="container" ng-controller="home as home">
+
+    <div class="jumbotron">
+        <div class="text-center">
+            <p class="bg-success">Current Challenge!</p>
+            <h1>{{home.current.cardText}}</h1>
+            
+            <table class="table borderless">
+                <thead>
+                    <tr>
+                        <th>Round</th>
+                        <th>Submissions</th>
+                        <th>Start</th>
+                        <th>End<th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{home.current.id}}</td>
+                        <td>{{home.current.submissions}}</td>
+                        <td>{{home.current.startTime}}</td>
+                        <td>{{home.current.endTime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-show="authenticated">
+                <button class="btn btn-lg btn-success">Submit Your GIF!</button>
+            </div>
+            <div ng-show="!authenticated">
+                <button class="btn btn-lg btn-info">Register Now!</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>Past Challenges</h3>
+        <table class="table borderless">
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Challenge</th>
+                    <th>Submissions</th>
+                    <th>Start</th>
+                    <th>End<th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in home.past">
+                    <td>{{row.id}}</td>
+                    <td>{{row.cardText}}</td>
+                    <td>{{row.submissions}}</td>
+                    <td>{{row.startTime}}</td>
+                    <td>{{row.endTime}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

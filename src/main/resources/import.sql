@@ -25,9 +25,13 @@ insert into user_role (user_id, role_id) values (6, 1)
 
 
 -- Create some challenges
-insert into challenge (state, card_text, start_time, end_time) values (4, "First Challenge", "2017-04-01 00:00:00", "2017-04-02 00:00:00")
-insert into challenge (state, card_text, start_time, end_time) values (3, "Current Challenge", "2017-04-02 00:00:00", "2017-03-02 00:00:00")
-insert into challenge (state, card_text, start_time, end_time) values (2, "Next Challenge", "2017-04-03 00:00:00", "2017-04-04 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (4, "First Challenge Ever", "2017-04-01 00:00:00", "2017-04-02 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (4, "Oh great. It's Monday.", "2017-04-02 00:00:00", "2017-04-03 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (4, "You keep whiping your butt and there's still poop", "2017-04-03 00:00:00", "2017-04-04 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (4, "I saw your mom making out with the last challenge", "2017-04-04 00:00:00", "2017-04-05 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (3, "The current challenge makes you feel like...", "2017-04-05 00:00:00", "2017-04-06 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (2, "Tomorrow's Challenge", "2017-04-06 00:00:00", "2017-04-07 00:00:00")
+insert into challenge (state, card_text, start_time, end_time) values (2, "Some future challenge", "2017-04-07 00:00:00", "2017-04-08 00:00:00")
 
 
 -- Add Gif urls

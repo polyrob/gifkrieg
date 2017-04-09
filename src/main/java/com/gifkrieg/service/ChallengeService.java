@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface ChallengeService {
 
-    public List<Challenge> getCurrentAndPastChallenges(int past);
+    Challenge getCurrentChallenge();
+
+    public List<Challenge> getChallenges(int fromId, int toId);
 }

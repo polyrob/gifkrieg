@@ -21,7 +21,7 @@ public class UserGifServiceImpl implements UserGifService {
 
 
     @Override
-    @Cacheable(value = "userGifs")
+    //@Cacheable(value = "userGifs")
     public List<UserGif> getUserGifs(int userId) {
         return userGifRepository.findByUserId(userId);
     }

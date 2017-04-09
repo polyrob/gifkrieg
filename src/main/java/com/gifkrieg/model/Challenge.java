@@ -19,8 +19,8 @@ public class Challenge {
     private String cardText;
     @Column(name = "submissions", columnDefinition="INT NOT NULL DEFAULT 0")
     private int submissions;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private long startTime;
+    private long endTime;
 
 
 
@@ -48,19 +48,19 @@ public class Challenge {
         this.cardText = cardText;
     }
 
-    public LocalDateTime getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 

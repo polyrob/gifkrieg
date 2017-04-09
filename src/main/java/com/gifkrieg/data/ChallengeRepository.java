@@ -20,7 +20,7 @@ public interface ChallengeRepository extends JpaRepository<Challenge, Integer> {
 
     Challenge findByState(State state);
 
-    List<Challenge> findByIdIn(Collection<Integer> idList);
+    List<Challenge> findByIdInOrderByIdDesc(Collection<Integer> idList);
 
 
 

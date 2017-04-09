@@ -31,6 +31,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
+    public static final int START_INVENTORY_SIZE = 3;
     Logger log = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
@@ -73,6 +74,7 @@ public class LoginController {
         securityService.autologin(user.getUsername(), user.getPasswordConfirm());
 
         // get starting gifs
+        user.setInventorySize(START_INVENTORY_SIZE);
         userService.acquireStarterGifs(user);
 
         GKUserDetails gkUserDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -96,6 +98,8 @@ public class LoginController {
     @RequestMapping("/user")
     public Principal user(Principal user) {
         log.info("user() called in LoginController.");
+
+//        GKUserDetails userDetails
         return user;
     }
 
