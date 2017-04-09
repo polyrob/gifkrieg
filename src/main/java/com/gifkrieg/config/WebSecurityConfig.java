@@ -59,10 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers(HttpMethod.POST, "/auth/**").permitAll().
                 antMatchers(HttpMethod.GET, "/pub/**").permitAll().
                 antMatchers(HttpMethod.GET, "/api/logout").authenticated().
-                antMatchers(HttpMethod.GET, "/api/**").hasAuthority("USER").
-                antMatchers(HttpMethod.POST, "/api/**").hasAuthority("USER").
-                antMatchers(HttpMethod.GET, "/admin/**").hasAuthority("ADMIN").
-                antMatchers(HttpMethod.POST, "/admin/**").hasAuthority("ADMIN").
+                antMatchers(HttpMethod.GET, "/api/**").hasAuthority("ROLE_USER").
+                antMatchers(HttpMethod.POST, "/api/**").hasAuthority("ROLE_USER").
+                antMatchers(HttpMethod.GET, "/admin/**").hasAuthority("ROLE_ADMIN").
+                antMatchers(HttpMethod.POST, "/admin/**").hasAuthority("ROLE_ADMIN").
                 anyRequest().permitAll().
 
                 and().formLogin().permitAll().and().

@@ -26,7 +26,7 @@ public class ChallengeController {
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public String apiTest(Model model, HttpSession session) {
         log.info("API Test method called");
-        return "something";
+        return "WOrks!";
     }
 
     @RequestMapping(path = "/challenge", method = RequestMethod.GET)
