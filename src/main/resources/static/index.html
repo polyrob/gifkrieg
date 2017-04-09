@@ -44,11 +44,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     
                     <li ng-show="authenticated" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-mouseover="getUserGifs()">Your GIFs <b class="caret"></b></a> 
+                        <a href="#/mydeck" class="dropdown-toggle" data-toggle="dropdown" ng-mouseover="getUserGifs()">Your GIFs <b class="caret"></b></a> 
+<!--
 
                         <ul class="dropdown-menu">
                             <li class="kopie" ng-repeat="gif in userGifs"><img class="gif-box" src="{{gif.url}}" /></li>
                         </ul>
+-->
                         
                        
                     </li>
@@ -117,9 +119,10 @@
             <div ng-show="!authenticated">
                 <p>You are unauthenticated.</p>
             </div>
-            <div class="navbar-header" ng-repeat="n in authorities">
-                {{n}}
+            <div class="navbar-header">
+                {{authorities}}, {{username}}, {{userId}}, {{gifdeck}}
             </div>
+            
         </div>
     </div>
 

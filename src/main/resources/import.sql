@@ -37,5 +37,8 @@ insert into challenge (state, card_text, start_time, end_time) values (2, "Some 
 -- Add Gif urls
 insert into gif (url) values ("http://www.reactiongifs.com/r/chloe.gif"),("http://www.reactiongifs.com/r/lucille-portable.gif"),("http://www.reactiongifs.com/wp-content/uploads/2013/11/trre.gif"),("http://www.reactiongifs.com/r/ob1.gif"),("http://www.reactiongifs.com/wp-content/uploads/2013/05/dr-evil-right.gif"),("http://www.reactiongifs.com/wp-content/uploads/2012/12/grumpy-cat.gif"),("http://www.reactiongifs.com/r/isn.gif"),("http://www.reactiongifs.com/r/somg.gif"),("http://www.reactiongifs.com/r/triple.gif"),("http://www.reactiongifs.com/r/agape.gif"),("http://www.reactiongifs.com/wp-content/uploads/2012/11/really.gif"),("http://www.reactiongifs.com/wp-content/uploads/2014/01/zomg.gif"),("http://www.reactiongifs.com/r/sdey.gif"),("http://www.reactiongifs.com/r/elnb.gif")
 
+-- Add User Gifs user users
+insert into user_gif (user_id, gif_id) values (3, 1), (3,2), (3,3), (4,5), (4,6), (4,7)
+
 -- Add scores
 insert into stats (username, score, rounds) values ("polyrob", 25, 2),("user1", 20, 2),("user2", 25, 2),("user3", 2, 1),("user4", 0, 0)

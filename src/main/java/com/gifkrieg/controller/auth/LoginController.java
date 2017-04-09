@@ -43,22 +43,7 @@ public class LoginController {
     @Autowired
     private UserValidator userValidator;
 
-//    @RequestMapping(value = "/register", method = RequestMethod.GET)
-//    public ModelAndView registration() {
-////        log.info("Requested registration page.");
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("registration");
-////        User user = new User();
-////
-////        // Set below just to ease development
-////        user.setUsername("userX");
-////        user.setEmail("test@aol.com");
-////
-////        modelAndView.addObject("user", user);
-////        modelAndView.setViewName("register");
-//        return modelAndView;
-//    }
-//
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result registration(@RequestBody User user) {
         log.info("New Registration POST received.");
@@ -67,7 +52,6 @@ public class LoginController {
         if (errors != null && errors.keySet().size() > 0) {
             return new Result("failure", errors);
         }
-
 
         // Success! Save the user
         userService.saveNewUser(user);
@@ -96,11 +80,16 @@ public class LoginController {
 //    }
 
     @RequestMapping("/user")
-    public Principal user(Principal user) {
+    public GKUserDetails user(Principal user) {
         log.info("user() called in LoginController.");
+        if (user == null) {
+            // unauthenticated
+            return null;
+        }
+        GKUserDetails gkUserDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 //        GKUserDetails userDetails
-        return user;
+        return gkUserDetails;
     }
 
 }

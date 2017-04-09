@@ -1,7 +1,7 @@
 package com.gifkrieg.service;
 
-import com.gifkrieg.model.Challenge;
 import com.gifkrieg.model.Gif;
+import com.gifkrieg.model.UserGif;
 
 import java.util.List;
 
@@ -11,4 +11,6 @@ import java.util.List;
 public interface GifService {
 
     public List<Gif> getAllGifs();
+
+    public List<Gif> getGifsForUser(List<UserGif> id);
 }

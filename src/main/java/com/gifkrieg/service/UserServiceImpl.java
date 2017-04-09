@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         assert count > 5;   // just to make sure we don't loop forever
 
         //TODO: maybe get list of least used gifs to choose from
-        List<Integer> intList = new ArrayList<>(3);
+        List<Integer> intList = new ArrayList<>(NEW_USER_GIF_COUNT);
         while (intList.size() < NEW_USER_GIF_COUNT) {
             int x = random.nextInt(count);
             if (intList.contains(x)) continue;

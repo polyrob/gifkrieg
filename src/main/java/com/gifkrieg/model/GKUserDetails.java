@@ -4,12 +4,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by robbie on 4/8/17.
  */
 public class GKUserDetails extends org.springframework.security.core.userdetails.User {
     private int userId;
+    private List<Gif> userGifs;
 
     public GKUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
@@ -25,5 +27,13 @@ public class GKUserDetails extends org.springframework.security.core.userdetails
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public List<Gif> getUserGifs() {
+        return userGifs;
+    }
+
+    public void setUserGifs(List<Gif> userGifs) {
+        this.userGifs = userGifs;
     }
 }

@@ -1,9 +1,7 @@
 package com.gifkrieg.service;
 
 import com.gifkrieg.data.UserRepository;
-import com.gifkrieg.model.GKUserDetails;
-import com.gifkrieg.model.Role;
-import com.gifkrieg.model.User;
+import com.gifkrieg.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,6 +24,12 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserGifService userGifService;
+
+    @Autowired
+    private GifService gifService;
 
     @Override
     @Transactional(readOnly = true)
@@ -41,6 +46,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         GKUserDetails ud = new GKUserDetails(user.getUsername(), user.getPassword(), grantedAuthorities);
         ud.setUserId(user.getId());
+
+        // set anything else we want available to client on login
+        List<UserGif> userGifs = userGifService.getUserGifs(user.getId());
+        List<Gif> gifs = gifService.getGifsForUser(userGifs);
+        ud.setUserGifs(gifs);
+
         return ud;
     }
 }

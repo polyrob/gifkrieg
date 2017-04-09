@@ -1,0 +1,15 @@
+<div class="container">
+
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>Your Deck</h1>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4"><img class="gif-box" ng-src="{{gif.url}}" /></div>
+    </div>
+
+
+</div>

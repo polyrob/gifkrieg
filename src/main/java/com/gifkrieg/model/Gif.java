@@ -1,6 +1,7 @@
 package com.gifkrieg.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "gif")
-public class Gif {
+public class Gif implements Serializable {
 
     private int id;
     @Column(length = 128)
