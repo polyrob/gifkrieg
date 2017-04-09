@@ -6,23 +6,23 @@
 
 <div class="container" ng-controller="leaderboard as lead">
 
-
     <table class="table">
         <thead>
-        <tr>
-            <th>Rank</th>
-            <th>User</th>
-            <th>Score</th>
-            <th>Rounds played<th>
-        </tr>
+            <tr>
+                <th>Rank</th>
+                <th>User</th>
+                <th>Score</th>
+                <th>Rounds played
+                    <th>
+            </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="row in lead.data">
-            <td>{{row.id}}</td>
-            <td>{{row.username}}</td>
-            <td>{{row.score}}</td>
-            <td>{{row.rounds}}</td>
-        </tr>
+            <tr ng-repeat="row in lead.data">
+                <td>{{row.id}}</td>
+                <td>{{row.username}}</td>
+                <td>{{row.score}}</td>
+                <td>{{row.rounds}}</td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -36,8 +36,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li ng-class="{active:nav.tab('home')}"><a href="#/">Home</a></li>
-                <li ng-class="{active:nav.tab('navigation')}"><a href="#/leaderboard">Leaderboard</a></li>
+                <li><a href="#/">Home</a></li>
+                <!-- ng-class="{active:nav.tab('home')}" if you want to do the tab highlighting-->
+                <li><a href="#/leaderboard">Leaderboard</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -45,50 +46,51 @@
                 <li ng-show="authenticated"><a href="/">Your Stats</a></li>
                 <li ng-show="authenticated"><a href="/">Admin</a></li>
                 <li ng-show="authenticated"><a href="" ng-click="nav.logout()">Logout</a></li>
-                <li class="dropdown" ng-show="!authenticated">
-                    <a href="#/login" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    Login via
-                                    <div class="social-buttons">
-                                        <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                                        <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-                                    </div>
-                                    or
-                                    <form class="form" role="form" method="post" th:action="@{/login}"
-                                          accept-charset="UTF-8"
-                                          id="login-nav">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                   placeholder="Username" th:required="required"/>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password"
-                                                   placeholder="Password" th:required="required"/>
-                                            <div class="help-block text-right"><a href="">Forget the password ?</a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> keep me logged-in</input>
-                                            </label>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="bottom text-center">
-                                    New here ? <a href="/register"><b>Join Us</b></a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                <li ng-show="!authenticated"><a href="#/login" ><b>Login</b></a></li>
+                <li ng-show="!authenticated"><a href="#/register">Register</a></li>
+                <!--<li class="dropdown" ng-show="!authenticated">-->
+                    <!--<ul id="login-dp" class="dropdown-menu">-->
+                        <!--<li>-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-12">-->
+                                    <!--Login via-->
+                                    <!--<div class="social-buttons">-->
+                                        <!--<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>-->
+                                        <!--<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>-->
+                                    <!--</div>-->
+                                    <!--or-->
+                                    <!--<form class="form" role="form" method="post" th:action="@{/login}"-->
+                                          <!--accept-charset="UTF-8"-->
+                                          <!--id="login-nav">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="sr-only" for="username">Username</label>-->
+                                            <!--<input type="text" class="form-control" id="username" name="username"-->
+                                                   <!--placeholder="Username" th:required="required"/>-->
+                                        <!--</div>-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="sr-only" for="password">Password</label>-->
+                                            <!--<input type="password" class="form-control" id="password" name="password"-->
+                                                   <!--placeholder="Password" th:required="required"/>-->
+                                            <!--<div class="help-block text-right"><a href="">Forget the password ?</a>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="form-group">-->
+                                            <!--<button type="submit" class="btn btn-primary btn-block">Sign in</button>-->
+                                        <!--</div>-->
+                                        <!--<div class="checkbox">-->
+                                            <!--<label>-->
+                                                <!--<input type="checkbox"> keep me logged-in</input>-->
+                                            <!--</label>-->
+                                        <!--</div>-->
+                                    <!--</form>-->
+                                <!--</div>-->
+                                <!--<div class="bottom text-center">-->
+                                    <!--New here ? <a href="/register"><b>Join Us</b></a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
 
             </ul>
         </div><!--/.nav-collapse -->
