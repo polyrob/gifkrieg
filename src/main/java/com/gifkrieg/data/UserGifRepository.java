@@ -1,7 +1,9 @@
 package com.gifkrieg.data;
 
+import com.gifkrieg.model.Score;
 import com.gifkrieg.model.UserGif;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,5 +16,7 @@ import java.util.List;
 public interface UserGifRepository extends JpaRepository<UserGif, Long> {
 
     List<UserGif> findByUserId(int userId);
+
+    UserGif findByUserIdAndGifId(int userId, int gifId);
 
 }

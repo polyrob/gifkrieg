@@ -55,14 +55,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 csrf().disable().
                 authorizeRequests().
-                antMatchers(HttpMethod.GET, "/auth/**").permitAll().
-                antMatchers(HttpMethod.POST, "/auth/**").permitAll().
-                antMatchers(HttpMethod.GET, "/pub/**").permitAll().
-                antMatchers(HttpMethod.GET, "/api/logout").authenticated().
-                antMatchers(HttpMethod.GET, "/api/**").hasAuthority("ROLE_USER").
-                antMatchers(HttpMethod.POST, "/api/**").hasAuthority("ROLE_USER").
-                antMatchers(HttpMethod.GET, "/admin/**").hasAuthority("ROLE_ADMIN").
-                antMatchers(HttpMethod.POST, "/admin/**").hasAuthority("ROLE_ADMIN").
+//                antMatchers(HttpMethod.GET, "/auth/**").permitAll().
+//                antMatchers(HttpMethod.POST, "/auth/**").permitAll().
+//                antMatchers(HttpMethod.GET, "/pub/**").permitAll().
+//                antMatchers(HttpMethod.GET, "/api/logout").authenticated().
+//                antMatchers(HttpMethod.GET, "/api/**").hasAuthority("ROLE_USER").
+//                antMatchers(HttpMethod.POST, "/api/**").hasAuthority("ROLE_USER").
+//                antMatchers(HttpMethod.GET, "/admin/**").hasAuthority("ROLE_ADMIN").
+//                antMatchers(HttpMethod.POST, "/admin/**").hasAuthority("ROLE_ADMIN").
                 anyRequest().permitAll().
 
                 and().formLogin().permitAll().and().

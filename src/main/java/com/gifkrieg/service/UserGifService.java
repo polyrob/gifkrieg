@@ -12,4 +12,8 @@ public interface UserGifService {
 
 
     List<UserGif> getUserGifs(int userId);
+
+    UserGif getUserGif(int userid, int gifId);
+
+    void removeGifFromInventory(UserGif userGif);
 }

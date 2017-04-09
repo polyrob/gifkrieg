@@ -1,6 +1,7 @@
 package com.gifkrieg.model;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,6 +12,9 @@ public class Result {
     private String status;
     private Map<String, String> errors;
     private GKUserDetails principal;
+
+    public Result() {
+    }
 
     public Result(String status) {
         this.status = status;
@@ -24,6 +28,13 @@ public class Result {
     public Result(String status, GKUserDetails principal) {
         this.status = status;
         this.principal = principal;
+    }
+
+    public void addError(String key, String value) {
+        if (this.getErrors() == null) {
+            this.errors = new HashMap<>();
+        }
+        this.errors.put(key, value);
     }
 
     public String getStatus() {

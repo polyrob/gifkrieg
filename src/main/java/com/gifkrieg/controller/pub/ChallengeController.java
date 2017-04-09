@@ -23,10 +23,8 @@ public class ChallengeController {
 
     private static final int RECENT_CHALLENGES = 3;
 
-
     @Autowired
     private ChallengeService challengeService;
-
 
     @RequestMapping(path = "/challenge", method = RequestMethod.GET)
     public Map getRecentChallenges() {

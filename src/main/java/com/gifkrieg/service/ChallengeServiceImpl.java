@@ -3,8 +3,8 @@ package com.gifkrieg.service;
 import com.gifkrieg.data.ChallengeRepository;
 import com.gifkrieg.model.Challenge;
 import com.gifkrieg.model.State;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +19,13 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Autowired
     private ChallengeRepository challengeRepository;
 
+    @Cacheable(value = "currentChallenge")
     @Override
     public Challenge getCurrentChallenge() {
         return challengeRepository.findByState(State.CURRENT);
     }
 
+    @Cacheable(value = "challengeHistory")
     @Override
     public List<Challenge> getChallenges(int fromId, int toId) {
         if (fromId > toId) throw new IllegalArgumentException("fromId must be <= toId");
