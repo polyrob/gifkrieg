@@ -1,4 +1,4 @@
-package com.gifkrieg.controller.api.pub;
+package com.gifkrieg.controller.pub;
 
 import com.gifkrieg.model.Score;
 import com.gifkrieg.service.LeaderboardService;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by robbie on 4/7/17.
  */
 @RestController
-@RequestMapping("/api/pub")
+@RequestMapping("/pub")
 public class LeaderboardController {
     Logger log = LoggerFactory.getLogger(getClass().getName());
 

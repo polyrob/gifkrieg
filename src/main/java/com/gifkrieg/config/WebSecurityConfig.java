@@ -55,9 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 csrf().disable().
                 authorizeRequests().
-                antMatchers(HttpMethod.GET, "/api/pub/**").permitAll().
-                antMatchers(HttpMethod.GET, "/api/login").permitAll().
-                antMatchers(HttpMethod.POST, "/api/register").permitAll().
+                antMatchers(HttpMethod.GET, "/auth/**").permitAll().
+                antMatchers(HttpMethod.POST, "/auth/**").permitAll().
+                antMatchers(HttpMethod.GET, "/pub/**").permitAll().
                 antMatchers(HttpMethod.GET, "/api/logout").authenticated().
                 antMatchers(HttpMethod.GET, "/api/**").hasAuthority("USER").
                 antMatchers(HttpMethod.POST, "/api/**").hasAuthority("USER").

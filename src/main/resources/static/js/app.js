@@ -9,10 +9,10 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
         controller: 'navigation',
         controllerAs: 'controller'
     }).when('/register', {
-              templateUrl: 'register.html',
-              controller: 'navigation',
-              controllerAs: 'controller'
-          }).when('/leaderboard', {
+        templateUrl: 'register.html',
+        controller: 'register',
+        controllerAs: 'controller'
+    }).when('/leaderboard', {
         templateUrl: 'leaderboard.html'
         //        controller : 'leaderboard',
         //        controllerAs: 'controller'
@@ -47,7 +47,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
         } : {};
         console.log(headers);
         console.log("Doing get in authenticate()")
-        $http.get('user', {
+        $http.get('auth/user', {
             headers: headers
         }).then(function (response) {
             console.log(response);
@@ -95,6 +95,39 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
         });
     }
 
+}).controller('register', function ($rootScope, $scope, $http, $location) {
+
+    // create a blank object to handle form data.
+    $scope.user = {};
+    // calling our submit function.
+    $scope.submitForm = function () {
+        // Posting data to php file
+        $http({
+                method: 'POST',
+                url: '/auth/register',
+                data: $scope.user, //forms user object
+                headers: {
+                    //                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .success(function (data) {
+                if (data.errors) {
+                    // Showing errors.
+                    $scope.errorUsername = data.errors.username;
+                    $scope.errorEmail = data.errors.email;
+                    $scope.errorPassword = data.errors.password;
+                    $scope.errorPasswordConfirm = data.errors.passwordConfirm;
+                } else {
+                    $scope.message = data.message;
+                    $rootScope.authenticated = true;
+                    $rootScope.username = data.principal.username;
+                    $rootScope.authorities = data.principal.authorities;
+                    $location.path("/");
+                }
+            });
+    };
+
+
 
 }).controller('home', function ($http) {
     var self = this;
@@ -105,7 +138,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 }).controller('leaderboard', function ($http) {
     var self = this;
     console.log('leaderboard controller...');
-    $http.get('/api/pub/leaderboard').then(function (response) {
+    $http.get('/pub/leaderboard').then(function (response) {
         self.data = response.data;
     })
 });

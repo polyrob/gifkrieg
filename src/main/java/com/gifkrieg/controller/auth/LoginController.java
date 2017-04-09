@@ -1,5 +1,7 @@
-package com.gifkrieg.controller;
+package com.gifkrieg.controller.auth;
 
+import com.gifkrieg.model.GKUserDetails;
+import com.gifkrieg.model.Result;
 import com.gifkrieg.model.User;
 import com.gifkrieg.service.SecurityService;
 import com.gifkrieg.service.UserService;
@@ -8,22 +10,26 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResultUtils;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 
 /**
  * Created by robbie on 4/4/17.
  */
 
 @RestController
+@RequestMapping("/auth")
 public class LoginController {
     Logger log = LoggerFactory.getLogger(getClass().getName());
 
@@ -47,31 +53,31 @@ public class LoginController {
 ////        user.setUsername("userX");
 ////        user.setEmail("test@aol.com");
 ////
-////        modelAndView.addObject("userForm", user);
+////        modelAndView.addObject("user", user);
 ////        modelAndView.setViewName("register");
 //        return modelAndView;
 //    }
 //
-//    @RequestMapping(value = "/register", method = RequestMethod.POST)
-//    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-//        log.info("New Registration POST received.");
-//        userValidator.validate(userForm, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            return "register";
-//        }
-//
-//        // Success! Save the user
-//        userService.saveNewUser(userForm);
-//        securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
-//
-//        // get starting gifs
-//        userService.acquireStarterGifs(userForm);
-//
-//        model.addAttribute("test", "yes it does");
-//
-//        return "redirect:/regsuccess";
-//    }
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public Result registration(@RequestBody User user) {
+        log.info("New Registration POST received.");
+
+        Map<String, String> errors = userValidator.validate(user);
+        if (errors != null && errors.keySet().size() > 0) {
+            return new Result("failure", errors);
+        }
+
+
+        // Success! Save the user
+        userService.saveNewUser(user);
+        securityService.autologin(user.getUsername(), user.getPasswordConfirm());
+
+        // get starting gifs
+        userService.acquireStarterGifs(user);
+
+        GKUserDetails gkUserDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return new Result("success", gkUserDetails);
+    }
 //
 //    @RequestMapping(value = "/regsuccess")
 //    public String registerSuccess(Model model, String error, String logout) {

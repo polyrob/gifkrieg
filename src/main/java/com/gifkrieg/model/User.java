@@ -1,14 +1,7 @@
 package com.gifkrieg.model;
 
-import java.util.Set;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
+import java.util.Set;
 
 /**
  * Created by Rob on 4/2/2017.
