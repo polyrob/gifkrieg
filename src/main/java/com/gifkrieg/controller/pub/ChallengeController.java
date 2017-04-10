@@ -28,7 +28,7 @@ public class ChallengeController {
 
     @RequestMapping(path = "/challenge", method = RequestMethod.GET)
     public Map getRecentChallenges() {
-        log.info("getChallenge method called");
+        log.debug("getChallenge method called");
         Map<String, Object> response = new HashMap<>();
 
         // get current

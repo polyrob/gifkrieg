@@ -28,7 +28,7 @@ public class UserController {
 
     @RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
     public List<UserGif> getDetailsForUser(@PathVariable("id") int userId, Principal principal) {
-        log.info("getDetailsForUser(), userId: " + userId);
+        log.debug("getDetailsForUser(), userId: " + userId);
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         List<UserGif> userGifs = userGifService.getUserGifs(userDetails.getUserId());

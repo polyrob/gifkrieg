@@ -35,7 +35,7 @@ public class VotingController {
 
     @RequestMapping(path = "/challenge/{challengeId}", method = RequestMethod.GET)
     public ResponseEntity getSubmissionsForVoting(@PathVariable int challengeId) {
-        log.info("getSubmissionsForVoting() method called");
+        log.debug("getSubmissionsForVoting() method called");
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -44,5 +44,15 @@ public class VotingController {
         return ResponseEntity.ok(entries);
     }
 
+    @RequestMapping(path = "/challenge/{challengeId}", method = RequestMethod.POST)
+    public ResponseEntity postVoteForSubmission(@PathVariable int challengeId, @RequestParam int gifId) {
+        log.debug("postVoteForSubmission() method called");
+
+        GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Submission> entries = submissionService.getVotableEntriesForChallenge(challengeId, userDetails.getUserId());
+
+        return ResponseEntity.ok(entries);
+    }
 
 }

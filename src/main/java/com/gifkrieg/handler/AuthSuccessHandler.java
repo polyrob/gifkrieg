@@ -28,7 +28,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        log.info("onAuthenticationSuccess()");
+        log.debug("onAuthenticationSuccess()");
         HttpSession session = request.getSession();
 
         ValueOperations<String, String> ops = template.opsForValue();

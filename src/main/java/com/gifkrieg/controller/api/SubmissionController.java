@@ -41,7 +41,7 @@ public class SubmissionController {
     @Transactional
     @RequestMapping(path = "/submission/{challengeId}", method = RequestMethod.POST)
     public ResponseEntity postSubmission(@RequestParam(value = "gifId") int gifId, @PathVariable int challengeId) {
-        log.info("postSubmission method called");
+        log.debug("postSubmission method called");
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

@@ -40,13 +40,13 @@ public class MainController {
 //
 //    @RequestMapping("/")
 //    public ModelAndView index(Model model, HttpSession session) {
-//        log.info("Main index() controller");
+//        log.debug("Main index() controller");
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.set
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //
 //        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
-//            log.info("User is logged in.");
+//            log.debug("User is logged in.");
 //            GKUserDetails userDetails = (GKUserDetails) auth.getPrincipal();
 //            int userId = userDetails.getUserId();
 //
@@ -54,7 +54,7 @@ public class MainController {
 //            model.addAttribute("userGifs", userGifs);
 //            model.addAttribute("userGifsCount", userGifs.size());
 //        } else {
-//            log.info("User NOT logged in.");
+//            log.debug("User NOT logged in.");
 //        }
 //        model.addAttribute("currentChallenges", challengeService.getCurrentAndPastChallenges(1));
 //

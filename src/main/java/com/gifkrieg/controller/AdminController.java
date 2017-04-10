@@ -18,13 +18,13 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String adminRoot(Model model, HttpSession session) {
-        log.info("Admin method called");
+        log.debug("Admin method called");
         return "something";
     }
 
     @RequestMapping("/admin/test")
     public String adminTest(Model model, HttpSession session) {
-        log.info("Admin test method called");
+        log.debug("Admin test method called");
         return "admin test";
     }
 }

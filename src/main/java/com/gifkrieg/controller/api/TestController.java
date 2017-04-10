@@ -17,7 +17,7 @@ public class TestController {
 
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public ResponseEntity apiTest() {
-        log.info("API Test method called");
+        log.debug("API Test method called");
         return ResponseEntity.ok("Hello from /api/test");
     }
 }

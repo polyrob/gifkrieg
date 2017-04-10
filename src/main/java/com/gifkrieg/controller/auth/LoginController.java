@@ -46,7 +46,7 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result registration(@RequestBody User user) {
-        log.info("New Registration POST received.");
+        log.debug("New Registration POST received.");
 
         Map<String, String> errors = userValidator.validate(user);
         if (errors != null && errors.keySet().size() > 0) {
@@ -67,7 +67,7 @@ public class LoginController {
 //
 //    @RequestMapping(value = "/regsuccess")
 //    public String registerSuccess(Model model, String error, String logout) {
-//        log.info("Registration success method.");
+//        log.debug("Registration success method.");
 //        return "regsuccess";
 //    }
 
@@ -81,7 +81,7 @@ public class LoginController {
 
     @RequestMapping("/user")
     public GKUserDetails user(Principal user) {
-        log.info("user() called in LoginController.");
+        log.debug("user() called in LoginController.");
         if (user == null) {
             // unauthenticated
             return null;

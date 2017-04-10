@@ -26,7 +26,7 @@ public class LeaderboardController {
     @RequestMapping(path = "/leaderboard", method = RequestMethod.GET)
     public @ResponseBody
     List<Score> getTopUsers() {
-        log.info("API getTopUsers method called.");
+        log.debug("API getTopUsers method called.");
 
         // Check cache for leaderboard
         return leaderboardService.getTopScores();
