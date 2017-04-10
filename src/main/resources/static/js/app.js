@@ -1,9 +1,9 @@
 angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvider) {
 
         $routeProvider.when('/', {
-            templateUrl: 'home.html',
-            controller: 'home',
-            controllerAs: 'controller'
+            templateUrl: 'home.html'
+//            controller: 'home',
+//            controllerAs: 'controller'
         }).when('/login', {
             templateUrl: 'login.html',
             controller: 'navigation',
@@ -152,6 +152,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
     }).controller('home', function ($http) {
         var self = this;
+        // think about caching with  $http.get('/pub/challenge', {cache: true})
         $http.get('/pub/challenge').then(function (response) {
             self.current = response.data.current;
             self.past = response.data.past;

@@ -15,7 +15,7 @@ import java.util.List;
 @Repository("submissionRepository")
 public interface SubmissionRepository extends JpaRepository<Submission, Integer> {
 
-    @Query(value="SELECT * from submission where challengeId = ?1 AND userId != ?2 ORDER BY RAND() LIMIT ?3", nativeQuery=true)
+    @Query(value="SELECT * from submission where challenge_id = ?1 AND user_id != ?2 ORDER BY RAND() LIMIT ?3", nativeQuery=true)
     List<Submission> getRandomSubmissions(int challengeId, int userId, int count);
 
 }

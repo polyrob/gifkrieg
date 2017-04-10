@@ -18,6 +18,9 @@ public class Submission {
     private int gifId;
     private int votes;
 
+    public Submission() {
+    }
+
     public Submission(int challengeId, int gifId, int userId) {
         this.challengeId = challengeId;
         this.gifId = gifId;
