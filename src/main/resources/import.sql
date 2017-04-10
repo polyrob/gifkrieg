@@ -42,3 +42,8 @@ insert into user_gif (user_id, gif_id) values (3, 1), (3,2), (3,3), (4,5), (4,6)
 
 -- Add scores
 insert into stats (username, score, rounds) values ("polyrob", 25, 2),("user1", 20, 2),("user2", 25, 2),("user3", 2, 1),("user4", 0, 0)
+
+
+
+-- Set up indicies
+CREATE INDEX `idx_submission_challenge_id`  ON `gifkrieg`.`submission` (challenge_id) ALGORITHM DEFAULT LOCK DEFAULT

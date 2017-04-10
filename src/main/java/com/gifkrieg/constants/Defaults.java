@@ -6,4 +6,5 @@ package com.gifkrieg.constants;
 public class Defaults {
 
     public static final int INV_START_SIZE = 3;
+    public static final int ENTRIES_TO_VOTE = 4;
 }
