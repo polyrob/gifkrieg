@@ -1,6 +1,7 @@
 package com.gifkrieg.service;
 
 
+import com.gifkrieg.constants.Defaults;
 import com.gifkrieg.data.GifRepository;
 import com.gifkrieg.data.RoleRepository;
 import com.gifkrieg.data.UserGifRepository;
@@ -21,7 +22,6 @@ import java.util.*;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    public static final int NEW_USER_GIF_COUNT = 3;
     Logger log = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
@@ -54,8 +54,8 @@ public class UserServiceImpl implements UserService {
         assert count > 5;   // just to make sure we don't loop forever
 
         //TODO: maybe get list of least used gifs to choose from
-        List<Integer> intList = new ArrayList<>(NEW_USER_GIF_COUNT);
-        while (intList.size() < NEW_USER_GIF_COUNT) {
+        List<Integer> intList = new ArrayList<>(Defaults.INV_START_SIZE);
+        while (intList.size() < Defaults.INV_START_SIZE) {
             int x = random.nextInt(count);
             if (intList.contains(x)) continue;
             intList.add(x);

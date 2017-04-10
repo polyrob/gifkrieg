@@ -1,5 +1,7 @@
 package com.gifkrieg.model;
 
+import com.gifkrieg.constants.Defaults;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -83,7 +85,7 @@ public class User {
         this.roles = roles;
     }
 
-    @Column(name = "inventorySize", columnDefinition="INT NOT NULL DEFAULT 3")
+    @Column(name = "inventorySize", columnDefinition="INT NOT NULL DEFAULT " + Defaults.INV_START_SIZE)
     public int getInventorySize() {
         return inventorySize;
     }

@@ -7,6 +7,7 @@ import com.gifkrieg.model.UserGif;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
 import com.gifkrieg.service.UserGifService;
+import com.gifkrieg.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class SubmissionController {
 
     @Autowired
     private SubmissionService submissionService;
+
+    @Autowired
+    private UserService userService;
 
     @Transactional
     @RequestMapping(path = "/submission/{challengeId}", method = RequestMethod.POST)
@@ -63,6 +67,9 @@ public class SubmissionController {
 
         // remove the gif from the user's inventory
         userGifService.removeGifFromInventory(ug);
+
+        // update stats / counters
+        // TODO: maybe this would good for rabbitmq
 
         return ResponseEntity.ok("Submission accepted.");
     }

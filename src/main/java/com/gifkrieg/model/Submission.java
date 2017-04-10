@@ -1,5 +1,7 @@
 package com.gifkrieg.model;
 
+import com.gifkrieg.constants.Defaults;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ public class Submission {
     private int challengeId;
     private int userId;
     private int gifId;
+    private int votes;
 
     public Submission(int challengeId, int gifId, int userId) {
         this.challengeId = challengeId;
@@ -53,5 +56,14 @@ public class Submission {
 
     public void setGifId(int gifId) {
         this.gifId = gifId;
+    }
+
+    @Column(columnDefinition="INT NOT NULL DEFAULT 0")
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }

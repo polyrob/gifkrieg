@@ -11,4 +11,5 @@ public interface UserService {
     public void saveNewUser(User user);
 
     public void acquireStarterGifs(User user);
+
 }
