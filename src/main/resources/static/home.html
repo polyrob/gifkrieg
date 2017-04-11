@@ -1,92 +1,109 @@
 <div class="container" ng-controller="home as home">
 
-    <div class="jumbotron">
-        <div class="text-center">
-            <p class="bg-success">Current Challenge!</p>
-            <h1>{{home.current.cardText}}</h1>
-            
-            <table class="table borderless">
-                <thead>
+    <div class="row show-grid">
+        <div class="col-md-6">
+            <!-- current challenge -->
+            <div class="text-center">
+                <h2>Current Challenge!</h2>
+                <h1>{{home.current.cardText}}</h1>
+
+                <table class="table borderless">
+                    <thead>
                     <tr>
                         <th>Round</th>
                         <th>Submissions</th>
-                        <th>Start</th>
-                        <th>End<th>
+                        <!--<th>Start</th>-->
+                        <th>End
+                        <th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>{{home.current.id}}</td>
                         <td>{{home.current.submissions}}</td>
-                        <td>{{home.current.startTime}}</td>
+                        <!--<td>{{home.current.startTime}}</td>-->
                         <td>{{home.current.endTime}}</td>
                     </tr>
-                </tbody>
-            </table>
-            <div ng-show="authenticated">
-                <button ng-show="!hasSubmittedCurrent" class="btn btn-lg btn-success">Submit Your GIF!</button>
-                <div ng-show="hasSubmittedCurrent" class="alert alert-success" role="alert">You've Submitted! Now wait for voting.</div>
+                    </tbody>
+                </table>
+                <div ng-show="authenticated">
+                    <button ng-show="!hasSubmittedCurrent" class="btn btn-lg btn-success">Submit Your GIF!</button>
+                    <div ng-show="hasSubmittedCurrent" class="alert alert-success" role="alert">You've Submitted! Now
+                        wait for voting.
+                    </div>
+                </div>
+                <div ng-show="!authenticated">
+                    <a class="btn btn-lg btn-info" href="#/register">Register Now!</a>
+                </div>
             </div>
-            <div ng-show="!authenticated">
-                <a class="btn btn-lg btn-info" href="#/register">Register Now!</a>
+        </div>
+
+
+        <div class="col-md-6">
+            <!-- voting -->
+            <div class="text-center">
+                <h2>Voting Round!</h2>
+                <h1>{{home.current.cardText}}</h1>
+
+                <table class="table borderless">
+                    <thead>
+                    <tr>
+                        <th>Round</th>
+                        <th>Submissions</th>
+                        <!--<th>Start</th>-->
+                        <!--<th>End<th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{home.current.id}}</td>
+                        <td>{{home.current.submissions}}</td>
+                        <!--<td>{{home.current.startTime}}</td>-->
+                        <!--<td>{{home.current.endTime}}</td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-show="authenticated">
+                    <div ng-show="!hasVotedCurrent" class="btn btn-lg btn-success" role="alert">Cast Your Vote!</div>
+                    <div ng-show="hasVotedCurrent" class="alert alert-success" role="alert">You've Submitted! Now wait
+                        for voting.
+                    </div>
+                </div>
+                <div ng-show="!authenticated">
+                    <a class="btn btn-lg btn-info" href="#/register">Register Now!</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="jumbotron">
-        <div class="text-center">
-            <p class="bg-success">Voting Round!</p>
-            <h1>{{home.current.cardText}}</h1>
-
-            <table class="table borderless">
-                <thead>
-                <tr>
-                    <th>Round</th>
-                    <th>Submissions</th>
-                    <th>Start</th>
-                    <th>End<th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{home.current.id}}</td>
-                    <td>{{home.current.submissions}}</td>
-                    <td>{{home.current.startTime}}</td>
-                    <td>{{home.current.endTime}}</td>
-                </tr>
-                </tbody>
-            </table>
-            <div ng-show="authenticated">
-                <button ng-show="!hasSubmittedCurrent" class="btn btn-lg btn-success">Submit Your GIF!</button>
-                <div ng-show="hasSubmittedCurrent" class="alert alert-success" role="alert">You've Submitted! Now wait for voting.</div>
-            </div>
-            <div ng-show="!authenticated">
-                <button class="btn btn-lg btn-info"><a href="#/register">Register Now!</a></button>
+    <div>
+        <h1>Last Round Winners!</h1>
+        <div class="row show-grid">
+            <div class="col-md-4">
             </div>
         </div>
     </div>
-
 
     <div>
         <h3>Past Challenges</h3>
         <table class="table borderless">
             <thead>
-                <tr>
-                    <th>Round</th>
-                    <th>Challenge</th>
-                    <th>Submissions</th>
-                    <th>Start</th>
-                    <th>End<th>
-                </tr>
+            <tr>
+                <th>Round</th>
+                <th>Challenge</th>
+                <th>Submissions</th>
+                <!--<th>Start</th>-->
+                <!--<th>End<th>-->
+            </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in home.past">
-                    <td>{{row.id}}</td>
-                    <td>{{row.cardText}}</td>
-                    <td>{{row.submissions}}</td>
-                    <td>{{row.startTime}}</td>
-                    <td>{{row.endTime}}</td>
-                </tr>
+            <tr ng-repeat="row in home.past">
+                <td>{{row.id}}</td>
+                <td>{{row.cardText}}</td>
+                <td>{{row.submissions}}</td>
+                <!--<td>{{row.startTime}}</td>-->
+                <!--<td>{{row.endTime}}</td>-->
+            </tr>
             </tbody>
         </table>
     </div>

@@ -1,5 +1,6 @@
 package com.gifkrieg.service;
 
+import com.gifkrieg.model.Challenge;
 import com.gifkrieg.model.Submission;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface SubmissionService {
 
     boolean hasAlreadySubmittedForCurrentRound(int userId);
     boolean hasAlreadyVotedForVotingRound(int userId);
+
+    int getSubmissionCountForChallenge(Challenge current);
 }

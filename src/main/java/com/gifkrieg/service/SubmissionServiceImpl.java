@@ -67,5 +67,10 @@ public class SubmissionServiceImpl implements SubmissionService {
         return false;
     }
 
+    @Override
+    public int getSubmissionCountForChallenge(Challenge c) {
+        return submissionRepository.countByChallengeId(c.getId());
+    }
+
 
 }

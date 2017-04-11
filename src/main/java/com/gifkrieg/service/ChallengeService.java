@@ -12,4 +12,9 @@ public interface ChallengeService {
     Challenge getCurrentChallenge();
 
     public List<Challenge> getChallenges(int fromId, int toId);
+
+    Challenge getVotingChallenge();
+
+    Challenge getCompletedChallenge();
+
 }

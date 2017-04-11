@@ -2,6 +2,8 @@ package com.gifkrieg.controller.pub;
 
 import com.gifkrieg.model.Challenge;
 import com.gifkrieg.service.ChallengeService;
+import com.gifkrieg.service.SubmissionService;
+import com.gifkrieg.service.VotingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +28,40 @@ public class ChallengeController {
     @Autowired
     private ChallengeService challengeService;
 
+    @Autowired
+    private SubmissionService submissionService;
+
+    @Autowired
+    private VotingService votingService;
+
     @RequestMapping(path = "/challenge", method = RequestMethod.GET)
     public Map getRecentChallenges() {
         log.debug("getChallenge method called");
         Map<String, Object> response = new HashMap<>();
 
-        // get current
-        Challenge current = challengeService.getCurrentChallenge();
-        response.put("current", current);
+        try {
+            // get current
+            Challenge current = challengeService.getCurrentChallenge();
+            response.put("current", current);
+            int submissions = submissionService.getSubmissionCountForChallenge(current);
+            response.put("currentSubmissions", submissions);
 
-        // get previous
-        int currentId = current.getId();
-        List<Challenge> pastChallenges = challengeService.getChallenges(currentId - RECENT_CHALLENGES, currentId - 1);
-        response.put("past", pastChallenges);
+            Challenge voting = challengeService.getVotingChallenge();
+            response.put("voting", voting);
+
+            Challenge completed = challengeService.getCompletedChallenge();
+            response.put("completed", completed);
+            int votes = votingService.getVotesForChallenge(voting);
+            response.put("completedVotes", votes);
+
+            // get previous
+            int completedId = completed.getId();
+
+            List<Challenge> pastChallenges = challengeService.getChallenges(completedId - RECENT_CHALLENGES, completedId - 1);
+            response.put("past", pastChallenges);
+        } catch (Exception e) {
+            log.error("Exception getting challenges.", e);
+        }
         return response;
     }
 

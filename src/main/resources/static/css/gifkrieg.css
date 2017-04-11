@@ -1,5 +1,5 @@
 body{
-    padding:50px;
+    padding-top:50px;
 }
 
 #footer {
@@ -11,7 +11,6 @@ body{
 .gif-box {
     max-width: 300px;
 }
-
 
 .dropdown-menu > li.kopie > a {
     padding-left:5px;

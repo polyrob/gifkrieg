@@ -20,4 +20,6 @@ public interface VotingRepository extends JpaRepository<Vote, Integer> {
     boolean hasUserVotedInChallenge(int challengeId, int userId);
 
     boolean existsByChallengeIdAndUserId(int challengeId, int userId);
+
+    int countByChallengeId(int challengeId);
 }

@@ -7,15 +7,16 @@ public enum State {
     OFF,        //0
     ON,         //1
 
-    NEW,        //2
+    UPCOMING,   //2
     CURRENT,    //3
     VOTING,     //4
-    PAST,       //5
+    COMPLETE,   //5
+    PAST,       //6
 
-    ACTIVE,     //6
-    INACTIVE,
-    DELETED,    //8
-    BANNED
+    ACTIVE,     //7
+    INACTIVE,   //8
+    DELETED,    //9
+    BANNED      //10
 
 
 }

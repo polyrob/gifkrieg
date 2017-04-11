@@ -19,13 +19,25 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Autowired
     private ChallengeRepository challengeRepository;
 
-    @Cacheable(value = "currentChallenge")
+
+    // TODO: get these challenges in single query
     @Override
     public Challenge getCurrentChallenge() {
         return challengeRepository.findByState(State.CURRENT);
     }
 
-    @Cacheable(value = "challengeHistory")
+    @Override
+    public Challenge getVotingChallenge() {
+        return challengeRepository.findByState(State.VOTING);
+    }
+
+    @Override
+    public Challenge getCompletedChallenge() {
+        return challengeRepository.findByState(State.COMPLETE);
+    }
+
+
+    //@Cacheable(value = "challengeHistory")
     @Override
     public List<Challenge> getChallenges(int fromId, int toId) {
         if (fromId > toId) throw new IllegalArgumentException("fromId must be <= toId");
