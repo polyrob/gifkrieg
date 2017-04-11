@@ -21,6 +21,7 @@ public class User {
     @Enumerated(EnumType.ORDINAL)
     private State active;
     private int inventorySize;
+    private int pointsToNextLevel;
     private String passwordConfirm;
     private Set<Role> roles;
 
@@ -85,12 +86,21 @@ public class User {
         this.roles = roles;
     }
 
-    @Column(name = "inventorySize", columnDefinition="INT NOT NULL DEFAULT " + Defaults.INV_START_SIZE)
+    @Column(name = "inventorySize", columnDefinition="INT NOT NULL DEFAULT " + Defaults.START_INVENTORY_SIZE)
     public int getInventorySize() {
         return inventorySize;
     }
 
     public void setInventorySize(int inventorySize) {
         this.inventorySize = inventorySize;
+    }
+
+    @Column(name = "pointsToNextLevel", columnDefinition="INT NOT NULL DEFAULT " + Defaults.START_POINTS_TO_NEXT_LEVEL)
+    public int getPointsToNextLevel() {
+        return pointsToNextLevel;
+    }
+
+    public void setPointsToNextLevel(int pointsToNextLevel) {
+        this.pointsToNextLevel = pointsToNextLevel;
     }
 }

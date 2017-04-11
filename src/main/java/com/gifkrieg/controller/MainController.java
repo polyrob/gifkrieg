@@ -1,24 +1,12 @@
 package com.gifkrieg.controller;
 
-import com.gifkrieg.model.GKUserDetails;
-import com.gifkrieg.model.Gif;
-import com.gifkrieg.model.UserGif;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.GifService;
 import com.gifkrieg.service.UserGifService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * Created by Rob on 4/2/2017.

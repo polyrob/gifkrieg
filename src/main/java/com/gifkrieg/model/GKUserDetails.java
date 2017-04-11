@@ -12,6 +12,8 @@ import java.util.List;
 public class GKUserDetails extends org.springframework.security.core.userdetails.User {
     private int userId;
     private List<Gif> userGifs;
+    private boolean hasSubmittedCurrent;
+    private boolean hasVotedCurrent;
 
     public GKUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
@@ -35,5 +37,21 @@ public class GKUserDetails extends org.springframework.security.core.userdetails
 
     public void setUserGifs(List<Gif> userGifs) {
         this.userGifs = userGifs;
+    }
+
+    public boolean isHasSubmittedCurrent() {
+        return hasSubmittedCurrent;
+    }
+
+    public void setHasSubmittedCurrent(boolean hasSubmittedCurrent) {
+        this.hasSubmittedCurrent = hasSubmittedCurrent;
+    }
+
+    public boolean isHasVotedCurrent() {
+        return hasVotedCurrent;
+    }
+
+    public void setHasVotedCurrent(boolean hasVotedCurrent) {
+        this.hasVotedCurrent = hasVotedCurrent;
     }
 }

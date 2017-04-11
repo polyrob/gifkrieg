@@ -8,13 +8,14 @@ public enum State {
     ON,         //1
 
     NEW,        //2
-    CURRENT,
-    OLD,        //4
+    CURRENT,    //3
+    VOTING,     //4
+    PAST,       //5
 
-    ACTIVE,
-    INACTIVE,   //6
-    DELETED,
-    BANNED      //8
+    ACTIVE,     //6
+    INACTIVE,
+    DELETED,    //8
+    BANNED
 
 
 }

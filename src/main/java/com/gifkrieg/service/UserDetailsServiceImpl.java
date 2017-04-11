@@ -29,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserGifService userGifService;
 
     @Autowired
+    private SubmissionService submissionService;
+
+    @Autowired
     private GifService gifService;
 
     @Override
@@ -47,10 +50,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         GKUserDetails ud = new GKUserDetails(user.getUsername(), user.getPassword(), grantedAuthorities);
         ud.setUserId(user.getId());
 
-        // set anything else we want available to client on login
+        ////////// set anything else we want available to client on login
+        // get user's gifs
         List<UserGif> userGifs = userGifService.getUserGifs(user.getId());
         List<Gif> gifs = gifService.getGifsForUser(userGifs);
         ud.setUserGifs(gifs);
+
+        // determine if the user can submit current round
+        boolean hasSubmitted = submissionService.hasAlreadySubmittedForCurrentRound(ud.getUserId());
+        ud.setHasSubmittedCurrent(hasSubmitted);
+        // determine if user can vote for voting round
+        boolean hasVoted = submissionService.hasAlreadyVotedForVotingRound(ud.getUserId());
+        ud.setHasVotedCurrent(hasVoted);
+        ////////
 
         return ud;
     }

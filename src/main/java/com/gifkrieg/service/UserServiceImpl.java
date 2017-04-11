@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 /**
@@ -54,8 +53,8 @@ public class UserServiceImpl implements UserService {
         assert count > 5;   // just to make sure we don't loop forever
 
         //TODO: maybe get list of least used gifs to choose from
-        List<Integer> intList = new ArrayList<>(Defaults.INV_START_SIZE);
-        while (intList.size() < Defaults.INV_START_SIZE) {
+        List<Integer> intList = new ArrayList<>(Defaults.START_INVENTORY_SIZE);
+        while (intList.size() < Defaults.START_INVENTORY_SIZE) {
             int x = random.nextInt(count);
             if (intList.contains(x)) continue;
             intList.add(x);

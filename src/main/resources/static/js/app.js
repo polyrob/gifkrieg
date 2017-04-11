@@ -26,6 +26,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
 
     }).factory("UserService", function ($rootScope) {
+        var self = this;
 
         return {
             fromUserDetails: function (data) {
@@ -34,6 +35,8 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
                 $rootScope.authorities = data.authorities;
                 $rootScope.userId = data.userId;
                 $rootScope.gifdeck = data.userGifs;
+                $rootScope.hasSubmittedCurrent = data.hasSubmittedCurrent;
+                $rootScope.hasVotedCurrent = data.hasVotedCurrent;
                 return;
             },
             logout: function () {
