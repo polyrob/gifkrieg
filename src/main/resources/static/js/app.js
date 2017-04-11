@@ -153,12 +153,16 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
 
 
-    }).controller('home', function ($http) {
+    }).controller('home', function ($http, $rootScope) {
         var self = this;
         // think about caching with  $http.get('/pub/challenge', {cache: true})
         $http.get('/pub/challenge').then(function (response) {
             self.current = response.data.current;
             self.past = response.data.past;
+            self.voting = response.data.voting;
+            self.votingSubmissions = response.data.votingSubmissions;
+            self.currentSubmissions = response.data.currentSubmissions;
+            self.completedVotes = response.data.completedVotes;
 
             self.current.startTime = getDisplayDateTimeForEpoch(self.current.startTime);
             self.current.endTime = getDisplayDateTimeForEpoch(self.current.endTime);

@@ -48,6 +48,8 @@ public class ChallengeController {
 
             Challenge voting = challengeService.getVotingChallenge();
             response.put("voting", voting);
+            int votingSubmissions = submissionService.getSubmissionCountForChallenge(voting);
+            response.put("votingSubmissions", votingSubmissions);
 
             Challenge completed = challengeService.getCompletedChallenge();
             response.put("completed", completed);

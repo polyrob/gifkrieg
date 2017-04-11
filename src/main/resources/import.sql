@@ -55,7 +55,7 @@ insert into gif (url) values ("http://www.reactiongifs.com/r/chloe.gif"),("http:
 insert into user_gif (user_id, gif_id) values (3, 1), (3,2), (3,3), (4,5), (4,6), (4,7), (5,8), (5,9), (6,10), (6,11), (7,12), (7,13), (8,14), (8,15), (9,16), (9,17), (10,18), (10,19)
 
 -- Add some submissions
-insert into submission (challenge_id, gif_id, user_id) values (5, 3, 1),(5, 4, 5),(5, 5, 8),(5, 6, 11),(5, 7, 13),(5, 10, 18)
+insert into submission (challenge_id, gif_id, user_id) values (7, 3, 1),(7, 4, 5),(7, 5, 8),(7, 6, 11),(7, 7, 13),(7, 10, 18)
 
 -- Add scores
 insert into stats (username, score, rounds) values ("polyrob", 25, 2),("user1", 20, 2),("user2", 25, 2),("user3", 2, 1),("user4", 0, 0)
