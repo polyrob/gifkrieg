@@ -1,9 +1,6 @@
 package com.gifkrieg.controller.api;
 
-import com.gifkrieg.model.Challenge;
-import com.gifkrieg.model.GKUserDetails;
-import com.gifkrieg.model.Result;
-import com.gifkrieg.model.UserGif;
+import com.gifkrieg.model.*;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
 import com.gifkrieg.service.UserGifService;
@@ -40,7 +37,7 @@ public class SubmissionController {
 
     @Transactional
     @RequestMapping(path = "/submission/{challengeId}", method = RequestMethod.POST)
-    public ResponseEntity postSubmission(@RequestParam(value = "gifId") int gifId, @PathVariable int challengeId) {
+    public ResponseEntity postSubmission(@RequestBody PostSubmissionBody body, @PathVariable int challengeId) {
         log.debug("postSubmission method called");
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -50,7 +47,7 @@ public class SubmissionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid.challenge");
         }
 
-        UserGif ug = userGifService.getUserGif(userDetails.getUserId(), gifId);
+        UserGif ug = userGifService.getUserGif(userDetails.getUserId(), body.getGifId());
         if (ug == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("gif.invalid");
         }
@@ -58,7 +55,7 @@ public class SubmissionController {
         // necessary? not scalable solution
         synchronized (userDetails.getUsername()) {
             try {
-                submissionService.submitSubmission(challengeId, gifId, userDetails.getUserId());
+                submissionService.submitSubmission(challengeId, body.getGifId(), userDetails.getUserId());
             } catch (Exception e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("invalid.alreadySubmitted");

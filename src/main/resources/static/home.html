@@ -5,7 +5,7 @@
             <!-- current challenge -->
             <div class="text-center">
                 <h2>Current Challenge!</h2>
-                <h1>{{home.current.cardText}}</h1>
+                <h1>{{home.data.current.cardText}}</h1>
 
                 <table class="table borderless">
                     <thead>
@@ -27,7 +27,7 @@
                     </tbody>
                 </table>
                 <div ng-show="authenticated">
-                    <button ng-show="!hasSubmittedCurrent" class="btn btn-lg btn-success">Submit Your GIF!</button>
+                    <a ng-show="!hasSubmittedCurrent" class="btn btn-lg btn-success" href="#/submitGif">Submit Your GIF!</a>
                     <div ng-show="hasSubmittedCurrent" class="alert alert-success" role="alert">You've Submitted! Now
                         wait for voting.
                     </div>

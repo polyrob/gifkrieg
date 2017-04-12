@@ -1,0 +1,20 @@
+<div class="jumbotron">
+    <div class="text-center">
+        <h1>Submit Your GIF</h1>
+    </div>
+</div>
+
+<div class="container" ng-controller="submitGif as sg">
+
+    <!-- current challenge -->
+    <div class="text-center">
+        <h2>Current Challenge!</h2>
+        <h1>{{sg.data.current.cardText}}</h1>
+
+    </div>
+
+    <div><h2>Choose a GIF from your inventory to submit to this challenge</h2></div>
+    <div class="row">
+        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4"><img ng-click="submitGif(gif.id)" class="gif-box" ng-src="{{gif.url}}"/></div>
+    </div>
+</div>

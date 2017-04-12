@@ -1,9 +1,9 @@
-angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvider) {
+angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvider, $locationProvider) {
 
         $routeProvider.when('/', {
             templateUrl: 'home.html'
-//            controller: 'home',
-//            controllerAs: 'controller'
+            //            controller: 'home',
+            //            controllerAs: 'controller'
         }).when('/login', {
             templateUrl: 'login.html',
             controller: 'navigation',
@@ -16,11 +16,18 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
             templateUrl: 'leaderboard.html'
             //        controller : 'leaderboard',
             //        controllerAs: 'controller'
+        }).when('/submitGif', {
+            templateUrl: 'submitGif.html'
+            //        controller : 'leaderboard',
+            //        controllerAs: 'controller'
         }).when('/mydeck', {
             templateUrl: 'usergifs.html',
             controller: 'usergif',
             controllerAs: 'controller'
         }).otherwise('/');
+
+        //TODO see what's up with getting rid of #hashtag
+        //$locationProvider.html5Mode(true);
 
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -45,6 +52,37 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
                 $rootScope.authorities = null;
                 $rootScope.userId = null;
                 $rootScope.gifdeck = null;
+            }
+        };
+    })
+
+    .service('challengeService', function ($http) {
+        var data = {};
+
+        // think about caching with  $http.get('/pub/challenge', {cache: true})
+        $http.get('/pub/challenge').then(function (response) {
+            data.current = response.data.current;
+            data.past = response.data.past;
+            data.voting = response.data.voting;
+            data.votingSubmissions = response.data.votingSubmissions;
+            data.currentSubmissions = response.data.currentSubmissions;
+            data.completedVotes = response.data.completedVotes;
+
+            data.current.startTime = getDisplayDateTimeForEpoch(data.current.startTime);
+            data.current.endTime = getDisplayDateTimeForEpoch(data.current.endTime);
+            data.past.forEach(function (challenge) {
+                challenge.startTime = getDisplayDateTimeForEpoch(challenge.startTime);
+                challenge.endTime = getDisplayDateTimeForEpoch(challenge.endTime);
+            });
+        })
+
+
+        return {
+            getChallenge: function () {
+                return data;
+            },
+            setProperty: function (value) {
+                property = value;
             }
         };
     })
@@ -77,9 +115,9 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
                 if (response.data) {
                     $rootScope.authenticated = true;
                     UserService.fromUserDetails(response.data);
-//                    $rootScope.username = response.data.username;
-//                    $rootScope.authorities = response.data.authorities;
-//                    $rootScope.userId = response.data.userId;
+                    //                    $rootScope.username = response.data.username;
+                    //                    $rootScope.authorities = response.data.authorities;
+                    //                    $rootScope.userId = response.data.userId;
                 } else {
                     $rootScope.authenticated = false;
                 }
@@ -144,8 +182,8 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
                         $scope.message = data.message;
                         $rootScope.authenticated = true;
                         UserService.fromUserDetails(data)
-//                        $rootScope.username = data.principal.username;
-//                        $rootScope.authorities = data.principal.authorities;
+                        //                        $rootScope.username = data.principal.username;
+                        //                        $rootScope.authorities = data.principal.authorities;
                         $location.path("/");
                     }
                 });
@@ -153,36 +191,43 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
 
 
-    }).controller('home', function ($http, $rootScope) {
+    }).controller('home', function (challengeService) {
         var self = this;
+        self.data = challengeService.getChallenge();
         // think about caching with  $http.get('/pub/challenge', {cache: true})
-        $http.get('/pub/challenge').then(function (response) {
-            self.current = response.data.current;
-            self.past = response.data.past;
-            self.voting = response.data.voting;
-            self.votingSubmissions = response.data.votingSubmissions;
-            self.currentSubmissions = response.data.currentSubmissions;
-            self.completedVotes = response.data.completedVotes;
 
-            self.current.startTime = getDisplayDateTimeForEpoch(self.current.startTime);
-            self.current.endTime = getDisplayDateTimeForEpoch(self.current.endTime);
-            self.past.forEach(function (challenge) {
-                challenge.startTime = getDisplayDateTimeForEpoch(challenge.startTime);
-                challenge.endTime = getDisplayDateTimeForEpoch(challenge.endTime);
-            });
-        })
 
-    }).controller('leaderboard', function ($http) {
+    }).controller('leaderboard', function ($http, challengeService) {
         var self = this;
+        self.data = challengeService.getChallenge();
         $http.get('/pub/leaderboard').then(function (response) {
             self.data = response.data;
         })
+    }).controller('submitGif', function ($rootScope, $scope, $http, challengeService) {
+        var self = this;
+//        self.data = challengeService.getChallenge();
+
+        $scope.submitGif = function (gifId) {
+            console.log("submitting gif: " + gifId);
+//            var data = { params: {"gifId":gifId};
+            $http.post('/api/submission/' + challengeService.getChallenge().current.id, {'gifId': gifId})
+                .then(function successCallback(response) {
+                     console.log("Success! Gif submitted.");
+                     $rootScope.hasSubmittedCurrent = true;
+                   }, function errorCallback(response) {
+                   console.log("Failure with gif submission." + response);
+                     // called asynchronously if an error occurs
+                     // or server returns response with an error status.
+                   });
+        }
+
+
     }).controller('usergif', function ($http, $rootScope) {
         var self = this;
-//        $http.get('/api/user/' + $rootScope.userId).then(function (response) {
-//            self.data = response.data;
-//            console.log(response.data);
-//        })
+        //        $http.get('/api/user/' + $rootScope.userId).then(function (response) {
+        //            self.data = response.data;
+        //            console.log(response.data);
+        //        })
     });
 
 var getDisplayDateTimeForEpoch = function (epoch) {
