@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 anyRequest().permitAll().
 
                 and().formLogin().permitAll().and().
-                logout().
+                logout().invalidateHttpSession(true).deleteCookies("SESSION").
 //                .authorizeRequests()
 //                .antMatchers("/", "/login.html", "logout", "/register.html", "/register", "/api/leaderboard", "/leaderboard.html", "/home.html", "/user").permitAll() // #4
 //                //.antMatchers("/api/**").hasRole("USER") // #6

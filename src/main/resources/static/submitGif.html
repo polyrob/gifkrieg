@@ -15,6 +15,6 @@
 
     <div><h2>Choose a GIF from your inventory to submit to this challenge</h2></div>
     <div class="row">
-        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4"><img ng-click="submitGif(gif.id)" class="gif-box" ng-src="{{gif.url}}"/></div>
+        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4"><img ng-click="submitGif(gif)" class="gif-box" ng-src="{{gif.url}}"/></div>
     </div>
 </div>
