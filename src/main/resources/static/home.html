@@ -1,11 +1,11 @@
-<div class="container" ng-controller="home as home">
+<div class="container" ng-controller="challengeController as cc">
 
     <div class="row show-grid">
         <div class="col-md-6">
             <!-- current challenge -->
             <div class="text-center">
                 <h2>Current Challenge!</h2>
-                <h1>{{home.data.current.cardText}}</h1>
+                <h1>{{data.current.cardText}}</h1>
 
                 <table class="table borderless">
                     <thead>
@@ -19,10 +19,10 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{home.current.id}}</td>
-                        <td>{{home.currentSubmissions}}</td>
+                        <td>{{data.current.id}}</td>
+                        <td>{{data.currentSubmissions}}</td>
                         <!--<td>{{home.current.startTime}}</td>-->
-                        <td>{{home.current.endTime}}</td>
+                        <td>{{data.current.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -43,7 +43,7 @@
             <!-- voting -->
             <div class="text-center">
                 <h2>Voting Round!</h2>
-                <h1>{{home.voting.cardText}}</h1>
+                <h1>{{data.voting.cardText}}</h1>
 
                 <table class="table borderless">
                     <thead>
@@ -56,8 +56,8 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{home.voting.id}}</td>
-                        <td>{{home.votingSubmissions}}</td>
+                        <td>{{data.voting.id}}</td>
+                        <td>{{data.votingSubmissions}}</td>
                         <!--<td>{{home.current.startTime}}</td>-->
                         <!--<td>{{home.current.endTime}}</td>-->
                     </tr>
@@ -97,7 +97,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="row in home.past">
+            <tr ng-repeat="row in data.past">
                 <td>{{row.id}}</td>
                 <td>{{row.cardText}}</td>
                 <td>{{row.submissions}}</td>

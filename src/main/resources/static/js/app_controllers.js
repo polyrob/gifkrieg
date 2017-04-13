@@ -5,16 +5,11 @@ angular.module('gifkrieg')
         $rootScope.errors = [];
         $rootScope.hasError = false;
 
-        $rootScope.closeAlert = function (index) {
-            $scope.errors.splice(index, 1);
-        };
-
         self.tab = function (route) {
             return $route.current && route === $route.current.controller;
         };
 
         var authenticate = function (credentials, callback) {
-
             var headers = credentials ? {
                 authorization: "Basic " +
                     btoa(credentials.username + ":" +
@@ -27,9 +22,6 @@ angular.module('gifkrieg')
                 if (response.data) {
                     $rootScope.authenticated = true;
                     UserService.fromUserDetails(response.data);
-                    //                    $rootScope.username = response.data.username;
-                    //                    $rootScope.authorities = response.data.authorities;
-                    //                    $rootScope.userId = response.data.userId;
                 } else {
                     $rootScope.authenticated = false;
                 }
@@ -103,15 +95,13 @@ angular.module('gifkrieg')
 
 
 
-    }).controller('home', function (challengeService) {
-        var self = this;
-        self.data = challengeService.getChallenge();
-        // think about caching with  $http.get('/pub/challenge', {cache: true})
+    }).controller('challengeController', function ($scope, challengeService) {
+        challengeService.async().then(function(data) {
+            $scope.data = data;
+          });
 
 
     }).controller('leaderboard', function ($http, challengeService) {
-        var self = this;
-        self.data = challengeService.getChallenge();
         $http.get('/pub/leaderboard').then(function (response) {
             self.data = response.data;
         })

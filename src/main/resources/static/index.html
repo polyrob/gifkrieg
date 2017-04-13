@@ -47,15 +47,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     
                     <li ng-show="authenticated" class="dropdown">
-                        <a href="#/mydeck" class="dropdown-toggle" data-toggle="dropdown" ng-mouseover="getUserGifs()">Your GIFs <b class="caret"></b></a> 
-<!--
-
-                        <ul class="dropdown-menu">
-                            <li class="kopie" ng-repeat="gif in userGifs"><img class="gif-box" src="{{gif.url}}" /></li>
-                        </ul>
--->
-                        
-                       
+                        <a href="#/mydeck" class="dropdown-toggle" data-toggle="dropdown" ng-mouseover="getUserGifs()">Your GIFs <b class="caret"></b></a>
                     </li>
                     <li ng-show="authenticated"><a href="/">Your Stats</a></li>
                     <li ng-show="authenticated"><a href="/api/test">Test Api</a></li>
@@ -130,6 +122,7 @@
     </div>
 
     <script src="js/app.js"></script>
+    <script src="js/app_services.js"></script>
     <script src="js/app_routes.js"></script>
     <script src="js/app_controllers.js"></script>
 </body>
