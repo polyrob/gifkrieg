@@ -15,12 +15,10 @@ angular.module('gifkrieg')
                 controllerAs: 'controller'
             }).when('/leaderboard', {
                 templateUrl: 'leaderboard.html'
-                //        controller : 'leaderboard',
-                //        controllerAs: 'controller'
             }).when('/submitGif', {
                 templateUrl: 'submitGif.html'
-                //        controller : 'leaderboard',
-                //        controllerAs: 'controller'
+            }).when('/vote', {
+                templateUrl: 'vote.html'
             }).when('/mydeck', {
                 templateUrl: 'usergifs.html',
                 controller: 'usergif',

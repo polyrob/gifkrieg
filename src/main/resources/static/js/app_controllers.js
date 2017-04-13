@@ -86,8 +86,6 @@ angular.module('gifkrieg')
                         $scope.message = data.message;
                         $rootScope.authenticated = true;
                         UserService.fromUserDetails(data)
-                        //                        $rootScope.username = data.principal.username;
-                        //                        $rootScope.authorities = data.principal.authorities;
                         $location.path("/");
                     }
                 });
@@ -106,17 +104,16 @@ angular.module('gifkrieg')
              $scope.data = data;
         });
 
+
     }).controller('submitGifController', function ($rootScope, $scope, $location, gifSubmissionService, challengeService, userGifService) {
-
         $scope.submitGif = function (gif) {
-            // get current challenge
-
             console.log("submitting gif: " + gif.id);
 
             gifSubmissionService.async(challengeService.currentChallenge(), gif).then(
                 function successCallback(response) {
                    console.log("Success! Gif submitted.");
                    $rootScope.hasSubmittedCurrent = true;
+                   //TODO: maybe instead just grab the gif index first and if successful remove it from the $rootScope
                     userGifService.async().then(function(data) {
                         $location.path("/");
                     })

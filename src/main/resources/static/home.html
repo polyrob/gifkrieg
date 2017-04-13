@@ -64,10 +64,8 @@
                     </tbody>
                 </table>
                 <div ng-show="authenticated">
-                    <div ng-show="!hasVotedCurrent" class="btn btn-lg btn-success" role="alert">Cast Your Vote!</div>
-                    <div ng-show="hasVotedCurrent" class="alert alert-success" role="alert">You've Submitted! Now wait
-                        for voting.
-                    </div>
+                    <a ng-show="!hasVotedCurrent" class="btn btn-lg btn-success" href="#/vote">Cast Your Vote!</a>
+                    <div ng-show="hasVotedCurrent" class="alert alert-success" role="alert">Thanks for voting!</div>
                 </div>
                 <div ng-show="!authenticated">
                     <a class="btn btn-lg btn-info" href="#/register">Register Now!</a>
