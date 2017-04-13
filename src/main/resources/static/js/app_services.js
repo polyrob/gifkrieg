@@ -41,36 +41,28 @@ angular.module('gifkrieg')
                 }
                 return promise;
             }
-          };
-          return myService;
+        };
+        return myService;
+    })
+
+    .factory('leaderboardService', function ($http) {
+            var promise;
+            var myService = {
+                async: function() {
+                    if ( !promise ) {
+                      // $http returns a promise, which has a then function, which also returns a promise
+                        promise = $http.get('/pub/leaderboard').then(function (response) {
+                        // The then function here is an opportunity to modify the response
+                        console.log(response);
+                        // The return value gets picked up by the then in the controller.
+                        return response.data;
+                      });
+                      // Return the promise to the controller
+                      return promise;
+                    }
+                    return promise;
+                }
+            };
+            return myService;
         });
 
-//
-//        var data = {};
-//
-//        // think about caching with  $http.get('/pub/challenge', {cache: true})
-//        $http.get('/pub/challenge').then(function (response) {
-//            data.current = response.data.current;
-//            data.past = response.data.past;
-//            data.voting = response.data.voting;
-//            data.votingSubmissions = response.data.votingSubmissions;
-//            data.currentSubmissions = response.data.currentSubmissions;
-//            data.completedVotes = response.data.completedVotes;
-//
-//            data.current.startTime = getDisplayDateTimeForEpoch(data.current.startTime);
-//            data.current.endTime = getDisplayDateTimeForEpoch(data.current.endTime);
-//            data.past.forEach(function (challenge) {
-//                challenge.startTime = getDisplayDateTimeForEpoch(challenge.startTime);
-//                challenge.endTime = getDisplayDateTimeForEpoch(challenge.endTime);
-//            });
-//        })
-//
-//
-//        return {
-//            getChallenge: function () {
-//                return data;
-//            },
-//            setProperty: function (value) {
-//                property = value;
-//            }
-//        };

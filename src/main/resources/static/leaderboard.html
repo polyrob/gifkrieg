@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<div class="container" ng-controller="leaderboard as lead">
+<div class="container" ng-controller="leaderboardService as ls">
 
     <table class="table">
         <thead>
@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="row in lead.data">
+            <tr ng-repeat="row in data">
                 <td>{{row.id}}</td>
                 <td>{{row.username}}</td>
                 <td>{{row.score}}</td>

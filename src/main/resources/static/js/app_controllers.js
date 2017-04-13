@@ -101,10 +101,11 @@ angular.module('gifkrieg')
           });
 
 
-    }).controller('leaderboard', function ($http, challengeService) {
-        $http.get('/pub/leaderboard').then(function (response) {
-            self.data = response.data;
-        })
+    }).controller('leaderboardService', function ($scope, leaderboardService) {
+        leaderboardService.async().then(function(data) {
+             $scope.data = data;
+        });
+
     }).controller('submitGif', function ($rootScope, $scope, $http, $location, challengeService) {
         var self = this;
         //        self.data = challengeService.getChallenge();
