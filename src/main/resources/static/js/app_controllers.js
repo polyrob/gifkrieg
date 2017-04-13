@@ -101,30 +101,33 @@ angular.module('gifkrieg')
           });
 
 
-    }).controller('leaderboardService', function ($scope, leaderboardService) {
+    }).controller('leaderboardController', function ($scope, leaderboardService) {
         leaderboardService.async().then(function(data) {
              $scope.data = data;
         });
 
-    }).controller('submitGif', function ($rootScope, $scope, $http, $location, challengeService) {
-        var self = this;
-        //        self.data = challengeService.getChallenge();
+    }).controller('submitGifController', function ($rootScope, $scope, $location, gifSubmissionService, challengeService, userGifService) {
 
         $scope.submitGif = function (gif) {
+            // get current challenge
+
             console.log("submitting gif: " + gif.id);
-            $http.post('/api/submission/' + challengeService.getChallenge().current.id, {
-                    'gifId': gif.id
-                })
-                .then(function successCallback(response) {
-                    console.log("Success! Gif submitted.");
-                    $rootScope.hasSubmittedCurrent = true;
-                    //                     $rootScope.gifdeck.pop(gif);  NOT POP
-                    $location.path("/");
+
+            gifSubmissionService.async(challengeService.currentChallenge(), gif).then(
+                function successCallback(response) {
+                   console.log("Success! Gif submitted.");
+                   $rootScope.hasSubmittedCurrent = true;
+                    userGifService.async().then(function(data) {
+                        $location.path("/");
+                    })
+
                 }, function errorCallback(response) {
-                    console.log("Failure with gif submission." + response);
-                    alert("Something went wrong with your submission");
-                });
-        }
+                   console.log("Failure with gif submission." + response);
+                   alert("Something went wrong with your submission");
+                })
+            }
+
+
 
 
     }).controller('usergif', function ($http, $rootScope) {
