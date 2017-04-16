@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{data.current.id}}</td>
+                        <td>{{data.current.submissionId}}</td>
                         <td>{{data.currentSubmissions}}</td>
                         <!--<td>{{home.current.startTime}}</td>-->
                         <td>{{data.current.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
@@ -56,7 +56,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{data.voting.id}}</td>
+                        <td>{{data.voting.submissionId}}</td>
                         <td>{{data.votingSubmissions}}</td>
                         <!--<td>{{home.current.startTime}}</td>-->
                         <!--<td>{{home.current.endTime}}</td>-->
@@ -96,7 +96,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="row in data.past">
-                <td>{{row.id}}</td>
+                <td>{{row.submissionId}}</td>
                 <td>{{row.cardText}}</td>
                 <td>{{row.submissions}}</td>
                 <!--<td>{{row.startTime}}</td>-->

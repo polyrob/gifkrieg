@@ -1,7 +1,8 @@
 angular.module('gifkrieg')
 
-    .factory("UserService", function ($rootScope) {
+    .factory("UserService", function ($rootScope, $http) {
         var self = this;
+        var userGifs;
 
         return {
             fromUserDetails: function (data) {
@@ -9,7 +10,7 @@ angular.module('gifkrieg')
                 $rootScope.username = data.username;
                 $rootScope.authorities = data.authorities;
                 $rootScope.userId = data.userId;
-                $rootScope.gifdeck = data.userGifs;
+//                $rootScope.gifdeck = data.userGifs;
                 $rootScope.hasSubmittedCurrent = data.hasSubmittedCurrent;
                 $rootScope.hasVotedCurrent = data.hasVotedCurrent;
                 return;
@@ -19,29 +20,44 @@ angular.module('gifkrieg')
                 $rootScope.username = null;
                 $rootScope.authorities = null;
                 $rootScope.userId = null;
-                $rootScope.gifdeck = null;
-            }
+//                $rootScope.gifdeck = null;
+                invalidateUserGifs();
+            },
+            getUserGifs: function () {
+                console.log("UserService.getUserGifs");
+                if ( !userGifs ) {
+                    userGifs = $http.get('/api/user/gifs').then(function (response) {
+                        console.log(response);
+                        return response.data;
+                    });
+                  return userGifs;
+                }
+                return userGifs;
+            },
+            invalidateUserGifs: function () {
+                userGifs = null;
+            },
         };
     })
 
-    .factory('userGifService', function ($rootScope, $http) {
-        var myService = {
-            async: function() {
-                  // $http returns a promise, which has a then function, which also returns a promise
-                    var promise = $http.get('/api/user/gifs').then(function (response) {
-                    // The then function here is an opportunity to modify the response
-                    console.log(response);
-                    // The return value gets picked up by the then in the controller.
-                    $rootScope.gifdeck = response.data;
-                    return response.data;
-                  });
-                  // Return the promise to the controller
-                  return promise;
-
-            }
-        };
-        return myService;
-    })
+//    .factory('userGifService', function ($rootScope, $http) {
+//        var myService = {
+//            async: function() {
+//                  // $http returns a promise, which has a then function, which also returns a promise
+//                    var promise = $http.get('/api/user/gifs').then(function (response) {
+//                    // The then function here is an opportunity to modify the response
+//                    console.log(response);
+//                    // The return value gets picked up by the then in the controller.
+//                    $rootScope.gifdeck = response.data;
+//                    return response.data;
+//                  });
+//                  // Return the promise to the controller
+//                  return promise;
+//
+//            }
+//        };
+//        return myService;
+//    })
 
 
     .factory('challengeService', function ($http) {
@@ -53,11 +69,11 @@ angular.module('gifkrieg')
                   // $http returns a promise, which has a then function, which also returns a promise
                     promise = $http.get('/pub/challenge').then(function (response) {
                     // The then function here is an opportunity to modify the response
-                    console.log(response);
-                    // The return value gets picked up by the then in the controller.
-                    current = response.data.current;
-                    return response.data;
-                  });
+                        console.log(response);
+                        // The return value gets picked up by the then in the controller.
+                        current = response.data.current;
+                        return response.data;
+                    });
                   // Return the promise to the controller
                   return promise;
                 }
@@ -92,20 +108,41 @@ angular.module('gifkrieg')
         })
 
     .factory('gifSubmissionService', function ($http) {
-                var promise;
-                var myService = {
-                    async: function(challenge, gif) {
-                      // $http returns a promise, which has a then function, which also returns a promise
-                        var promise = $http.post('/api/submission/' + challenge.id, {'gifId': gif.id}).then(function (response) {
-                            // The then function here is an opportunity to modify the response
-                            console.log(response);
-                            // The return value gets picked up by the then in the controller.
-                            return response.data;
-                      });
-                      // Return the promise to the controller
-                      return promise;
+        var promise;
+        var myService = {
+            async: function(challenge, gif) {
+              // $http returns a promise, which has a then function, which also returns a promise
+                var promise = $http.post('/api/submission/' + challenge.id, {'gifId': gif.id}).then(function (response) {
+                    // The then function here is an opportunity to modify the response
+                    console.log(response);
+                    // The return value gets picked up by the then in the controller.
+                    return response.data;
+              });
+              // Return the promise to the controller
+              return promise;
 
-                    }
-                };
-                return myService;
-            });
+            }
+        };
+        return myService;
+    })
+
+    .factory('votingService', function ($http) {
+            var promise;
+            var myService = {
+                getSubmissionsForVoting: function(challenge) {
+                    var promise = $http.get('/api/challenge/' + challenge.id).then(function (response) {
+                        console.log(response);
+                        return response.data;
+                    });
+                    return promise;
+                },
+                castVote : function(challenge, gif) {
+                    var promise = $http.post('/api/challenge/' + challenge.id, {'gifId': gif.id}).then(function (response) {
+                        console.log(response);
+                        return response.data;
+                    });
+                    return promise
+                }
+            };
+            return myService;
+        });

@@ -86,7 +86,7 @@ angular.module('gifkrieg')
                         $scope.message = data.message;
                         $rootScope.authenticated = true;
                         UserService.fromUserDetails(data)
-                        $location.path("/");
+                        $location.path("/mydeck");
                     }
                 });
         };
@@ -105,13 +105,44 @@ angular.module('gifkrieg')
         });
 
 
-    }).controller('submitGifController', function ($rootScope, $scope, $location, gifSubmissionService, challengeService, userGifService) {
+    }).controller('submitGifController', function ($rootScope, $scope, $location, gifSubmissionService, challengeService, UserService) {
+        UserService.getUserGifs().then(function(data) {
+            $scope.gifdeck = data;
+        });
+
         $scope.submitGif = function (gif) {
             console.log("submitting gif: " + gif.id);
 
             gifSubmissionService.async(challengeService.currentChallenge(), gif).then(
                 function successCallback(response) {
                    console.log("Success! Gif submitted.");
+                   $rootScope.hasSubmittedCurrent = true;
+                   //TODO: maybe instead just grab the gif index first and if successful remove it from the $rootScope
+                    UserService.invalidateUserGifs();
+                    $location.path("/");
+
+
+                }, function errorCallback(response) {
+                   console.log("Failure with gif submission." + response);
+                   alert("Something went wrong with your submission");
+                })
+            };
+
+
+    }).controller('votingController', function ($rootScope, $scope, $location, votingService, challengeService) {
+        challengeService.async().then(function(data) {
+                    votingService.getSubmissionsForVoting(data.voting).then(function(entries) {
+                                $scope.data = entries;
+                    });
+        });
+
+
+        $scope.vote = function (gif) {
+            console.log("voting for gif: " + gif.id);
+
+            votingService.castVote(challengeService.currentChallenge(), gif).then(
+                function successCallback(response) {
+                   console.log("Success! Vot submitted.");
                    $rootScope.hasSubmittedCurrent = true;
                    //TODO: maybe instead just grab the gif index first and if successful remove it from the $rootScope
                     userGifService.async().then(function(data) {
@@ -124,13 +155,8 @@ angular.module('gifkrieg')
                 })
             }
 
-
-
-
-    }).controller('usergif', function ($http, $rootScope) {
-        var self = this;
-        //        $http.get('/api/user/' + $rootScope.userId).then(function (response) {
-        //            self.data = response.data;
-        //            console.log(response.data);
-        //        })
+    }).controller('usergif', function ($scope, UserService) {
+        UserService.getUserGifs().then(function(data) {
+            $scope.gifdeck = data;
+        });
     });

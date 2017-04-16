@@ -9,7 +9,6 @@ import com.gifkrieg.model.State;
 import com.gifkrieg.model.Submission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class SubmissionServiceImpl implements SubmissionService {
         Challenge currentChallenge = challengeRepository.findByState(State.CURRENT);
 
 //        Submission query = new Submission();
-//        query.setChallengeId(currentChallenge.getId());
+//        query.setChallengeId(currentChallenge.getSubmissionId());
 //        query.setUserId(userId);
 //        ExampleMatcher NAME_MATCHER = ExampleMatcher.matching().withMa
 //                .withMatcher("challenge_id", ExampleMatcher.GenericPropertyMatchers.ignoreCase());
