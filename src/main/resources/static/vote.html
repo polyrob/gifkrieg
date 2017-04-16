@@ -17,7 +17,7 @@
     <div class="row fill text-center">
         <div ng-repeat="submission in data" class="col-xs-6 col-md-4">
             <p>{{submission.userId}}</p>
-            <img  class="img-responsive" ng-click="vote(gif)" ng-src="{{submission.gif.url}}"/>
+            <img  class="img-responsive" ng-click="castVote(submission)" ng-src="{{submission.gif.url}}"/>
         </div>
     </div>
 </div>

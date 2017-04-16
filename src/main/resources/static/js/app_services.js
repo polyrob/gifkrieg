@@ -136,8 +136,8 @@ angular.module('gifkrieg')
                     });
                     return promise;
                 },
-                castVote : function(challenge, gif) {
-                    var promise = $http.post('/api/challenge/' + challenge.id, {'gifId': gif.id}).then(function (response) {
+                castVote : function(challengeId, gif) {
+                    var promise = $http.post('/api/challenge/' + challengeId, {'gifId': gif.id}).then(function (response) {
                         console.log(response);
                         return response.data;
                     });

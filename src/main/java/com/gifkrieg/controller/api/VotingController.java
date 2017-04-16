@@ -1,7 +1,6 @@
 package com.gifkrieg.controller.api;
 
-import com.gifkrieg.model.GKUserDetails;
-import com.gifkrieg.model.Submission;
+import com.gifkrieg.model.*;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
 import com.gifkrieg.service.UserService;
@@ -45,7 +44,7 @@ public class VotingController {
     }
 
     @RequestMapping(path = "/challenge/{challengeId}", method = RequestMethod.POST)
-    public ResponseEntity postVoteForSubmission(@PathVariable int challengeId, @RequestParam int gifId) {
+    public ResponseEntity postVoteForSubmission(@PathVariable int challengeId, @RequestBody PostSubmissionBody gifId) {
         log.debug("postVoteForSubmission() method called");
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
