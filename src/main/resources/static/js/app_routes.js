@@ -23,7 +23,7 @@ angular.module('gifkrieg')
                 templateUrl: 'usergifs.html',
                 controller: 'usergif',
                 controllerAs: 'controller'
-            }).otherwise('/');
+            }).otherwise({templateUrl:'error/404.html'});
 
             //TODO see what's up with getting rid of #hashtag
             //$locationProvider.html5Mode(true);
