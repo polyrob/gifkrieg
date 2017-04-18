@@ -1,7 +1,6 @@
 package com.gifkrieg.data;
 
 
-import com.gifkrieg.model.Challenge;
 import com.gifkrieg.model.Submission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,4 +24,6 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
     boolean existsByChallengeIdAndUserId(int challengeId, int userId);
 
     int countByChallengeId(int challengeId);
+
+    List<Submission> findAllByChallengeIdAndIdIn(int challengeId, List<Integer> idList);
 }

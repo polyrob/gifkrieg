@@ -1,23 +1,16 @@
-<div class="jumbotron">
-    <div class="text-center">
-        <h1>Vote!</h1>
-    </div>
-</div>
 
 <div class="container" ng-controller="votingController as vc">
-
-    <!-- current challenge -->
-    <div class="text-center">
-        <h2>Voting Challenge!</h2>
-        <h1>{{data.voting.cardText}}</h1>
-
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>Vote!</h1>
+            <h2>{{voting.cardText}}</h2>
+        </div>
     </div>
 
-    <div><h3>Select your favorite response to the challenge from these submissions:</h3></div>
+    <div class="text-center"><h3>Select your favorite response to the challenge from these submissions:</h3></div>
     <div class="row fill text-center">
         <div ng-repeat="submission in data" class="col-xs-6 col-md-4">
-            <p>{{submission.userId}}</p>
-            <img  class="img-responsive" ng-click="castVote(submission)" ng-src="{{submission.gif.url}}"/>
+            <img class="img-responsive" ng-click="castVote(submission)" ng-src="{{submission.gif.url}}"/>
         </div>
     </div>
 </div>

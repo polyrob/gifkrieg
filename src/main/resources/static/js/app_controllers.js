@@ -132,6 +132,7 @@ angular.module('gifkrieg')
   var challengeId;
   challengeService.async().then(function (data) {
     challengeId = data.voting.id
+    $scope.voting = data.voting;
     votingService.getSubmissionsForVoting(data.voting).then(function (entries) {
       $scope.data = entries;
     });
@@ -140,8 +141,8 @@ angular.module('gifkrieg')
   $scope.castVote = function (submission) {
     votingService.castVote(challengeId, submission.gif).then(
       function successCallback(response) {
-        console.log("Success! Vot submitted.");
-        $rootScope.hasSubmittedCurrent = true;
+        console.log("Success! Vote submitted.");
+        $rootScope.hasVotedCurrent = true;
         //TODO: maybe instead just grab the gif index first and if successful remove it from the $rootScope
         userGifService.async().then(function (data) {
           $location.path("/");

@@ -1,9 +1,12 @@
 package com.gifkrieg.controller.api;
 
-import com.gifkrieg.model.*;
+import com.gifkrieg.model.GKUserDetails;
+import com.gifkrieg.model.PostSubmissionBody;
+import com.gifkrieg.model.Submission;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
 import com.gifkrieg.service.UserService;
+import com.gifkrieg.service.VotingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -29,6 +31,9 @@ public class VotingController {
     private SubmissionService submissionService;
 
     @Autowired
+    private VotingService votingService;
+
+    @Autowired
     private UserService userService;
 
 
@@ -38,7 +43,7 @@ public class VotingController {
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        List<Submission> entries = submissionService.getVotableEntriesForChallenge(challengeId, userDetails.getUserId());
+        List<Submission> entries = votingService.getVotableEntriesForChallenge(challengeId, userDetails.getUserId());
 
         return ResponseEntity.ok(entries);
     }
@@ -49,9 +54,9 @@ public class VotingController {
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        List<Submission> entries = submissionService.getVotableEntriesForChallenge(challengeId, userDetails.getUserId());
+        //TODO
 
-        return ResponseEntity.ok(entries);
+        return ResponseEntity.ok(null);
     }
 
 }
