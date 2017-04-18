@@ -96,6 +96,9 @@ angular.module('gifkrieg')
                 }
                 return promise;
             },
+            invalidateChallenges: function() {
+                promise = null;
+            },
             currentChallenge: function() {
                 return current;
             }

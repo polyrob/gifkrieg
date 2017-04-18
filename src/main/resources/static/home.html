@@ -19,8 +19,8 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{data.current.submissionId}}</td>
-                        <td>{{data.currentSubmissions}}</td>
+                        <td>{{data.current.id}}</td>
+                        <td>{{data.current.submissions}}</td>
                         <!--<td>{{home.current.startTime}}</td>-->
                         <td>{{data.current.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                     </tr>
@@ -50,14 +50,16 @@
                     <tr>
                         <th>Round</th>
                         <th>Submissions</th>
+                        <th>Votes</th>
                         <!--<th>Start</th>-->
                         <!--<th>End<th>-->
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{data.voting.submissionId}}</td>
-                        <td>{{data.votingSubmissions}}</td>
+                        <td>{{data.voting.id}}</td>
+                        <td>{{data.voting.submissions}}</td>
+                        <td>{{data.voting.votes}}</td>
                         <!--<td>{{home.current.startTime}}</td>-->
                         <!--<td>{{home.current.endTime}}</td>-->
                     </tr>

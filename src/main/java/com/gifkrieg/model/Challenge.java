@@ -18,10 +18,13 @@ public class Challenge implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private State state;
     private String cardText;
-    @Column(name = "submissions", columnDefinition="INT NOT NULL DEFAULT 0")
-    private int submissions;
     private long startTime;
     private long endTime;
+
+    @Transient
+    private int submissions;
+    @Transient
+    private int votes;
 
 
 
@@ -71,5 +74,13 @@ public class Challenge implements Serializable {
 
     public void setSubmissions(int submissions) {
         this.submissions = submissions;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 }

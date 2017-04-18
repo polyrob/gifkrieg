@@ -1,6 +1,8 @@
 package com.gifkrieg.service;
 
 import com.gifkrieg.data.ChallengeRepository;
+import com.gifkrieg.data.SubmissionRepository;
+import com.gifkrieg.data.VotingRepository;
 import com.gifkrieg.model.Challenge;
 import com.gifkrieg.model.State;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +21,27 @@ public class ChallengeServiceImpl implements ChallengeService {
     @Autowired
     private ChallengeRepository challengeRepository;
 
+    @Autowired
+    private SubmissionRepository submissionRepository;
+
+    @Autowired
+    private VotingRepository votingRepository;
+
 
     // TODO: get these challenges in single query
     @Override
     public Challenge getCurrentChallenge() {
-        return challengeRepository.findByState(State.CURRENT);
+        Challenge c = challengeRepository.findByState(State.CURRENT);
+        c.setSubmissions(submissionRepository.countByChallengeId(c.getId()));
+        return c;
     }
 
     @Override
     public Challenge getVotingChallenge() {
-        return challengeRepository.findByState(State.VOTING);
+        Challenge c = challengeRepository.findByState(State.VOTING);
+        c.setSubmissions(submissionRepository.countByChallengeId(c.getId()));
+        c.setVotes(votingRepository.countByChallengeId(c.getId()));
+        return c;
     }
 
     @Override
@@ -48,8 +61,5 @@ public class ChallengeServiceImpl implements ChallengeService {
         List<Challenge> recentChallenges = challengeRepository.findByIdInOrderByIdDesc(pastList);
         return recentChallenges;
     }
-
-
-
 
 }

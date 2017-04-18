@@ -43,18 +43,18 @@ public class ChallengeController {
             // get current
             Challenge current = challengeService.getCurrentChallenge();
             response.put("current", current);
-            int submissions = submissionService.getSubmissionCountForChallenge(current);
-            response.put("currentSubmissions", submissions);
+//            int submissions = submissionService.getSubmissionCountForChallenge(current);
+//            response.put("currentSubmissions", submissions);
 
             Challenge voting = challengeService.getVotingChallenge();
             response.put("voting", voting);
-            int votingSubmissions = submissionService.getSubmissionCountForChallenge(voting);
-            response.put("votingSubmissions", votingSubmissions);
+//            int votingSubmissions = submissionService.getSubmissionCountForChallenge(voting);
+//            response.put("votingSubmissions", votingSubmissions);
 
             Challenge completed = challengeService.getCompletedChallenge();
             response.put("completed", completed);
-            int votes = votingService.getVotesForChallenge(voting);
-            response.put("completedVotes", votes);
+//            int votes = votingService.getVotesForChallenge(voting);
+//            response.put("completedVotes", votes);
 
             // get previous
             int completedId = completed.getId();

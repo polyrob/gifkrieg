@@ -122,7 +122,8 @@ angular.module('gifkrieg')
                     console.log("Success! Gif submitted.");
 //                    $rootScope.hasSubmittedCurrent = true;
                     UserService.invalidateUserState();
-                    //TODO: maybe instead just grab the gif index first and if successful remove it from the $rootScope
+                    invalidateChallenges.invalidateChallenges();
+
                     UserService.invalidateUserGifs();
                     $location.path("/");
 
@@ -151,6 +152,7 @@ angular.module('gifkrieg')
                     console.log("Success! Vote submitted.");
                     $rootScope.hasVotedCurrent = true;
                     UserService.invalidateUserState();
+                    invalidateChallenges.invalidateChallenges();
                     $location.path("/");
                 },
                 function errorCallback(response) {
