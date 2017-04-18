@@ -3,6 +3,7 @@ package com.gifkrieg.controller.api;
 import com.gifkrieg.model.GKUserDetails;
 import com.gifkrieg.model.PostSubmissionBody;
 import com.gifkrieg.model.Submission;
+import com.gifkrieg.model.Vote;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
 import com.gifkrieg.service.UserService;
@@ -51,10 +52,15 @@ public class VotingController {
     @RequestMapping(path = "/challenge/{challengeId}", method = RequestMethod.POST)
     public ResponseEntity postVoteForSubmission(@PathVariable int challengeId, @RequestBody PostSubmissionBody gifId) {
         log.debug("postVoteForSubmission() method called");
-
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        int userId = userDetails.getUserId();
 
-        //TODO
+        // ensure user has not voted in this round yet
+        if (votingService.hasUserVotedInRound(userId, challengeId)) {
+            return ResponseEntity.badRequest().body("User has already voted");
+        }
+
+        votingService.castVoteForSubmission(challengeId, gifId.getGifId(), userId);
 
         return ResponseEntity.ok(null);
     }

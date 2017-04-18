@@ -29,9 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserGifService userGifService;
 
     @Autowired
-    private SubmissionService submissionService;
-
-    @Autowired
     private GifService gifService;
 
     @Override
@@ -42,27 +39,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             // signon failed because the username was not found
             throw new UsernameNotFoundException(username);
         }
-
+        int userId = user.getId();
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
         GKUserDetails ud = new GKUserDetails(user.getUsername(), user.getPassword(), grantedAuthorities);
-        ud.setUserId(user.getId());
+        ud.setUserId(userId);
 
         ////////// set anything else we want available to client on login
         // get user's gifs
-        List<UserGif> userGifs = userGifService.getUserGifs(user.getId());
+        List<UserGif> userGifs = userGifService.getUserGifs(userId);
         List<Gif> gifs = gifService.getGifsForUser(userGifs);
         ud.setUserGifs(gifs);
 
-        // determine if the user can submit current round
-        boolean hasSubmitted = submissionService.hasAlreadySubmittedForCurrentRound(ud.getUserId());
-        ud.setHasSubmittedCurrent(hasSubmitted);
-        // determine if user can vote for voting round
-        boolean hasVoted = submissionService.hasAlreadyVotedForVotingRound(ud.getUserId());
-        ud.setHasVotedCurrent(hasVoted);
-        ////////
 
         return ud;
     }

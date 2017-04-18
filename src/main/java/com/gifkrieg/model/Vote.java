@@ -9,14 +9,25 @@ import javax.persistence.*;
 @Table(name = "voting")
 public class Vote {
 
-    private int id;
-    private int challengeId;
-    private int userId;
-    private int gifIdVotedFor;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private int challengeId;
+    private int voterId;
+    private int ownerId;
+    private int gifIdVotedFor;
+
+    public Vote() {
+    }
+
+    public Vote(int challengeId, int voterId, int ownerId, int gifIdVotedFor) {
+        this.challengeId = challengeId;
+        this.voterId = voterId;
+        this.ownerId = ownerId;
+        this.gifIdVotedFor = gifIdVotedFor;
+    }
+
+
     public int getId() {
         return id;
     }
@@ -33,12 +44,12 @@ public class Vote {
         this.challengeId = challengeId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getVoterId() {
+        return voterId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setVoterId(int userId) {
+        this.voterId = userId;
     }
 
     public int getGifIdVotedFor() {
@@ -47,5 +58,13 @@ public class Vote {
 
     public void setGifIdVotedFor(int gifIdVotedFor) {
         this.gifIdVotedFor = gifIdVotedFor;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }

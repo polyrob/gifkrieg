@@ -1,15 +1,19 @@
 package com.gifkrieg.service;
 
 import com.gifkrieg.constants.Defaults;
+import com.gifkrieg.data.ChallengeRepository;
 import com.gifkrieg.data.SubmissionRepository;
 import com.gifkrieg.data.VotingRepository;
 import com.gifkrieg.model.Challenge;
+import com.gifkrieg.model.State;
 import com.gifkrieg.model.Submission;
+import com.gifkrieg.model.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -23,11 +27,23 @@ public class VotingServiceImpl implements VotingService {
     private SubmissionRepository submissionRepository;
 
     @Autowired
+    private ChallengeRepository challengeRepository;
+
+    @Autowired
     private VotingRepository votingRepository;
 
     @Autowired
     private StringRedisTemplate template;
 
+
+    public boolean hasAlreadyVotedForVotingRound(int userId) {
+        Challenge currentChallenge = challengeRepository.findByState(State.VOTING);
+
+        if (votingRepository.existsByChallengeIdAndVoterId(currentChallenge.getId(), userId)) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public int getVotesForChallenge(Challenge voting) {
@@ -66,5 +82,19 @@ public class VotingServiceImpl implements VotingService {
         return entries.stream().map(Integer::parseInt).collect(Collectors.toList());
     }
 
+    public void castVoteForSubmission(int challengeId, int gifId, int voterId) {
+        Submission s = submissionRepository.findOneByChallengeIdAndGifId(challengeId, gifId);
+        if (s == null) {
+            throw new NoSuchElementException("Submission was not found. challenge: " + challengeId + ", gifId: " + gifId);
+        }
+
+        Vote v = new Vote(challengeId, voterId, s.getUserId(), gifId);
+        votingRepository.save(v);
+    }
+
+    @Override
+    public boolean hasUserVotedInRound(int userId, int challengeId) {
+        return votingRepository.existsByChallengeIdAndVoterId(challengeId, userId);
+    }
 
 }

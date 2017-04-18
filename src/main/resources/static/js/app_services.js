@@ -2,6 +2,7 @@ angular.module('gifkrieg')
 
     .factory("UserService", function ($rootScope, $http) {
         var self = this;
+        var userState;
         var userGifs;
 
         return {
@@ -11,8 +12,8 @@ angular.module('gifkrieg')
                 $rootScope.authorities = data.authorities;
                 $rootScope.userId = data.userId;
 //                $rootScope.gifdeck = data.userGifs;
-                $rootScope.hasSubmittedCurrent = data.hasSubmittedCurrent;
-                $rootScope.hasVotedCurrent = data.hasVotedCurrent;
+//                $rootScope.hasSubmittedCurrent = data.hasSubmittedCurrent;
+//                $rootScope.hasVotedCurrent = data.hasVotedCurrent;
                 return;
             },
             logout: function () {
@@ -23,6 +24,22 @@ angular.module('gifkrieg')
 //                $rootScope.gifdeck = null;
                 invalidateUserGifs();
             },
+
+            getUserState: function() {
+                console.log("UserService.getUserGifs");
+                if ( !userState ) {
+                    userState = $http.get('/api/user').then(function (response) {
+                        console.log(response);
+                        return response.data;
+                    });
+                  return userState;
+                }
+                return userState;
+            },
+            invalidateUserState: function() {
+                userState = null;
+            },
+
             getUserGifs: function () {
                 console.log("UserService.getUserGifs");
                 if ( !userGifs ) {

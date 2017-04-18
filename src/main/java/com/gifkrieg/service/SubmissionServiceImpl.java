@@ -44,14 +44,6 @@ public class SubmissionServiceImpl implements SubmissionService {
         return false;
     }
 
-    public boolean hasAlreadyVotedForVotingRound(int userId) {
-        Challenge currentChallenge = challengeRepository.findByState(State.VOTING);
-
-        if (votingRepository.existsByChallengeIdAndUserId(currentChallenge.getId(), userId)) {
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public int getSubmissionCountForChallenge(Challenge c) {

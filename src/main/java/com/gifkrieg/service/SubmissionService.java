@@ -9,7 +9,6 @@ public interface SubmissionService {
     void submitSubmission(int challengeId, int gifId, int userId) throws Exception;
 
     boolean hasAlreadySubmittedForCurrentRound(int userId);
-    boolean hasAlreadyVotedForVotingRound(int userId);
 
     int getSubmissionCountForChallenge(Challenge current);
 }

@@ -26,4 +26,6 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
     int countByChallengeId(int challengeId);
 
     List<Submission> findAllByChallengeIdAndIdIn(int challengeId, List<Integer> idList);
+
+    Submission findOneByChallengeIdAndGifId(int challengeId, int gifId);
 }
