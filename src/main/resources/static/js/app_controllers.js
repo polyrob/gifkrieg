@@ -54,8 +54,11 @@ angular.module('gifkrieg')
         };
 
         self.logout = function () {
-            $http.post('logout', {}).finally(function () {
+            $http.post('logout', {}).then(function () {
+                console.log("Doing logout.");
                 UserService.logout();
+                UserService.invalidateUserGifs();
+                UserService.invalidateUserState();
                 $location.path("/");
             });
         };
@@ -92,15 +95,17 @@ angular.module('gifkrieg')
         };
 
 
-    }).controller('challengeController', function ($scope, challengeService, UserService) {
+    }).controller('challengeController', function ($scope, $rootScope, challengeService, UserService) {
         challengeService.async().then(function (data) {
             $scope.data = data;
         });
 
-        UserService.getUserState().then(function (data) {
-            $scope.hasSubmittedCurrent = data.hasSubmittedCurrent;
-            $scope.hasVotedCurrent = data.hasVotedCurrent;
-        });
+        if ($rootScope.authenticated) {
+            UserService.getUserState().then(function (data) {
+                $scope.hasSubmittedCurrent = data.hasSubmittedCurrent;
+                $scope.hasVotedCurrent = data.hasVotedCurrent;
+            });
+        }
 
 
     }).controller('leaderboardController', function ($scope, leaderboardService) {
@@ -122,7 +127,7 @@ angular.module('gifkrieg')
                     console.log("Success! Gif submitted.");
 //                    $rootScope.hasSubmittedCurrent = true;
                     UserService.invalidateUserState();
-                    invalidateChallenges.invalidateChallenges();
+                    challengeService.invalidateChallenges();
 
                     UserService.invalidateUserGifs();
                     $location.path("/");
@@ -130,8 +135,8 @@ angular.module('gifkrieg')
 
                 },
                 function errorCallback(response) {
-                    console.log("Failure with gif submission." + response);
-                    alert("Something went wrong with your submission");
+                    console.log("Failure with gif submission." + response.data);
+                    alert(response.data);
                 })
         };
 

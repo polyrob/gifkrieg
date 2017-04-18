@@ -1,5 +1,7 @@
 package com.gifkrieg.controller.api;
 
+import com.gifkrieg.exception.DuplicateRequestException;
+import com.gifkrieg.exception.GifAlreadySubmittedException;
 import com.gifkrieg.model.*;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
@@ -56,9 +58,11 @@ public class SubmissionController {
         synchronized (userDetails.getUsername()) {
             try {
                 submissionService.submitSubmission(challengeId, body.getGifId(), userDetails.getUserId());
-            } catch (Exception e) {
+            } catch (DuplicateRequestException e) {
                 e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("invalid.alreadySubmitted");
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You've already submitted for this challenge. You shouldn't be here.");
+            } catch (GifAlreadySubmittedException e) {
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("This GIF was already submitted by another user.");
             }
         }
 

@@ -3,6 +3,8 @@ package com.gifkrieg.service;
 import com.gifkrieg.data.ChallengeRepository;
 import com.gifkrieg.data.SubmissionRepository;
 import com.gifkrieg.data.VotingRepository;
+import com.gifkrieg.exception.DuplicateRequestException;
+import com.gifkrieg.exception.GifAlreadySubmittedException;
 import com.gifkrieg.model.Challenge;
 import com.gifkrieg.model.State;
 import com.gifkrieg.model.Submission;
@@ -25,10 +27,13 @@ public class SubmissionServiceImpl implements SubmissionService {
     private VotingRepository votingRepository;
 
     @Override
-    public void submitSubmission(int challengeId, int gifId, int userId) throws Exception {
+    public void submitSubmission(int challengeId, int gifId, int userId) throws DuplicateRequestException, GifAlreadySubmittedException {
         Submission submission = new Submission(challengeId, gifId, userId);
         if (submissionRepository.exists(Example.of(submission))) {
-            throw new Exception("User has already submitted this.");
+            throw new DuplicateRequestException("User has already submitted this.");
+        }
+        if (submissionRepository.existsByChallengeIdAndGifId(challengeId, gifId)) {
+            throw new GifAlreadySubmittedException("Another user has already submitted this GIF to this Challenge");
         }
         submissionRepository.save(submission);
     }

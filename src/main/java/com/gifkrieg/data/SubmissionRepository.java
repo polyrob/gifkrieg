@@ -23,6 +23,8 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
     boolean existsByChallengeIdAndUserId(int challengeId, int userId);
 
+    boolean existsByChallengeIdAndGifId(int challengeId, int gifId);
+
     int countByChallengeId(int challengeId);
 
     List<Submission> findAllByChallengeIdAndIdIn(int challengeId, List<Integer> idList);
