@@ -1,4 +1,22 @@
 angular.module('gifkrieg')
+
+    .controller('ModalInstanceCtrl', function ($scope, $modalInstance, data) {
+
+      $scope.data = data;
+//      $scope.selected = {
+//        item: $scope.items[0]
+//      };
+
+      $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+      };
+
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+      };
+    })
+
+
     .controller('navigation', function ($rootScope, $scope, $route, $http, $location, UserService) {
         var self = this;
 
@@ -108,10 +126,24 @@ angular.module('gifkrieg')
         }
 
 
-    }).controller('leaderboardController', function ($scope, leaderboardService) {
+    }).controller('leaderboardController', function ($scope, $modal, leaderboardService) {
         leaderboardService.async().then(function (data) {
             $scope.data = data;
         });
+
+
+        var modalInstance = $modal.open({
+              templateUrl: 'myModalContent.html',
+              controller: 'ModalInstanceCtrl',
+              size: 'sm',
+              resolve: {
+                data: function () {
+                  //return $scope.items;
+                  return {title: "My Title",
+                          content: ['a','b','c']}
+                }
+              }
+            });
 
 
     }).controller('submitGifController', function ($rootScope, $scope, $location, gifSubmissionService, challengeService, UserService) {
@@ -170,4 +202,9 @@ angular.module('gifkrieg')
         UserService.getUserGifs().then(function (data) {
             $scope.gifdeck = data;
         });
+
+    }).controller('notify', function ($scope) {
+         UserService.getUserGifs().then(function (data) {
+              $scope.gifdeck = data;
+         });
     });

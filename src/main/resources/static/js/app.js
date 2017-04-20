@@ -1,2 +1,1 @@
-angular.module('gifkrieg', ['ngRoute'])
-
+angular.module('gifkrieg', ['ngRoute', 'ui.bootstrap'])

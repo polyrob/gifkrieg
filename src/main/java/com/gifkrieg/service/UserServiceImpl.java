@@ -34,8 +34,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    Random random = new Random(System.currentTimeMillis());
+    private Random random = new Random(System.currentTimeMillis());
 
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 
     @Override
     public void saveNewUser(User user) {
@@ -71,9 +76,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+
+
 
 }

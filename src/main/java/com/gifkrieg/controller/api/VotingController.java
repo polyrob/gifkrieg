@@ -62,6 +62,8 @@ public class VotingController {
 
         votingService.castVoteForSubmission(challengeId, gifId.getGifId(), userId);
 
+        // get a new gif for the user, if they have room in their inventory.
+
         return ResponseEntity.ok(null);
     }
 
