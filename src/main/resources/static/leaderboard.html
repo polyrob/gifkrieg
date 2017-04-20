@@ -5,24 +5,112 @@
 </div>
 
 <div class="container" ng-controller="leaderboardController as lc">
+    <div class="row show-grid">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>User</th>
-                <th>Score</th>
-                <th>Rounds played
-                    <th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in data">
-                <td>{{row.submissionId}}</td>
-                <td>{{row.username}}</td>
-                <td>{{row.score}}</td>
-                <td>{{row.rounds}}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="col-md-6">
+            <div class="text-center">
+                <h2>Commanders</h2>
+                <h4>Highest Scores Overall</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Rounds played
+                        <th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in data">
+                        <td>{{row.submissionId}}</td>
+                        <td>{{row.username}}</td>
+                        <td>{{row.score}}</td>
+                        <td>{{row.rounds}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <h2>Hottest</h2>
+                <h4>Highest Scores This Week</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Rounds played
+                        <th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in data">
+                        <td>{{row.submissionId}}</td>
+                        <td>{{row.username}}</td>
+                        <td>{{row.score}}</td>
+                        <td>{{row.rounds}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <h2>Military Strategists</h2>
+                <h4>Most Votes Per Submission</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Rounds played
+                        <th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in data">
+                        <td>{{row.submissionId}}</td>
+                        <td>{{row.username}}</td>
+                        <td>{{row.score}}</td>
+                        <td>{{row.rounds}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <h2>War Profiteers</h2>
+                <h4>Most Coins in the Bank</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Rounds played
+                        <th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in data">
+                        <td>{{row.submissionId}}</td>
+                        <td>{{row.username}}</td>
+                        <td>{{row.score}}</td>
+                        <td>{{row.rounds}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
 </div>

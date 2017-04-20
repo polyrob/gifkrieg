@@ -1,5 +1,14 @@
 <div class="container" ng-controller="challengeController as cc">
 
+    <div ng-show="!authenticated" class="jumbotron">
+        <div class="text-center">
+            <h1>Welcome to Gifkrieg!</h1>
+            <p class="lead">
+                <b>COLLECT</b> from an arsenal of GIFS, <b>SUBMIT</b> them to various challenges, <b>VOTE</b> along with the community for your favorites, achieve <b>VICTORY</b>.
+            </p>
+        </div>
+    </div>
+
     <div class="row show-grid">
         <div class="col-md-6">
             <!-- current challenge -->

@@ -1,9 +1,6 @@
 package com.gifkrieg.controller.api;
 
-import com.gifkrieg.model.GKUserDetails;
-import com.gifkrieg.model.PostSubmissionBody;
-import com.gifkrieg.model.Submission;
-import com.gifkrieg.model.Vote;
+import com.gifkrieg.model.*;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
 import com.gifkrieg.service.UserService;
@@ -64,7 +61,7 @@ public class VotingController {
 
         // get a new gif for the user, if they have room in their inventory.
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(new CreditsResponse(15));
     }
 
 }

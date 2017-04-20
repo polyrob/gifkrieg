@@ -188,9 +188,16 @@ angular.module('gifkrieg')
                 function successCallback(response) {
                     console.log("Success! Vote submitted.");
                     $rootScope.hasVotedCurrent = true;
-                    UserService.invalidateUserState();
-                    invalidateChallenges.invalidateChallenges();
+                    //UserService.invalidateUserState();
+                    challengeService.invalidateChallenges();
                     $location.path("/");
+                    if (response.credits) {
+                        $rootScope.credits += response.credits;
+                        $.bootstrapGrowl(response.credits + ' credits received for voting!',{
+                                    type: 'success',
+                                    delay: 4000,
+                                });
+                    }
                 },
                 function errorCallback(response) {
                     console.log("Failure with gif submission." + response);

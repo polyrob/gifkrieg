@@ -5,17 +5,17 @@ package com.gifkrieg.model;
  */
 public class UserState {
 
-    private int points;
+    private int credits;
     private boolean hasSubmittedCurrent;
     private boolean hasVotedCurrent;
 
 
-    public int getPoints() {
-        return points;
+    public int getCredits() {
+        return credits;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
     public boolean isHasSubmittedCurrent() {

@@ -25,6 +25,7 @@ angular.module('gifkrieg')
                 if ( !userState ) {
                     userState = $http.get('/api/user').then(function (response) {
                         console.log(response);
+                        $rootScope.credits = response.data.credits;
                         return response.data;
                     });
                   return userState;
