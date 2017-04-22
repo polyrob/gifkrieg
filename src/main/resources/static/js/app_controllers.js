@@ -165,10 +165,9 @@ angular.module('gifkrieg')
                     $location.path("/");
                     if (response.credits) {
                         $rootScope.credits += response.credits;
-                        $.bootstrapGrowl(response.credits + ' credits received for submitting!',{
-                            type: 'success',
-                            delay: 4000,
-                        });
+                        $.notify({
+                            message: response.credits + ' credits received for submitting!'
+                        },{type: 'success'});
                     }
 
                 },
@@ -196,13 +195,13 @@ angular.module('gifkrieg')
                     $rootScope.hasVotedCurrent = true;
                     //UserService.invalidateUserState();
                     challengeService.invalidateChallenges();
+                    UserService.invalidateUserState();
                     $location.path("/");
                     if (response.credits) {
                         $rootScope.credits += response.credits;
-                        $.bootstrapGrowl(response.credits + ' credits received for voting!',{
-                                    type: 'success',
-                                    delay: 4000,
-                                });
+                        $.notify({
+                            message: response.credits + ' credits received for voting!'
+                        },{type: 'success'});
                     }
                 },
                 function errorCallback(response) {
@@ -215,6 +214,37 @@ angular.module('gifkrieg')
         UserService.getUserGifs().then(function (data) {
             $scope.gifdeck = data;
         });
+
+    }).controller('armoryController', function ($rootScope, $scope, $http, $location, UserService) {
+        UserService.getUserGifs().then(function (data) {
+            $scope.gifdeck = data;
+            $scope.gifdeck.size = data.length;
+        });
+
+        UserService.getUserState().then(function (data) {
+            $scope.user = data;
+        });
+
+        $scope.getNewRandomGif = function () {
+            console.log("getting new gif");
+            $http({
+                    method: 'GET',
+                    url: 'api/user/gifs/getRandom',
+                })
+                .then(function successCallback(response) {
+                    UserService.invalidateUserState();
+                    UserService.invalidateUserGifs();
+                    $.notify({
+                        message: "You've received a new GIF! <img class=\"gif-box-sm\" src=\"" + response.data.url + "\"/>"
+                    },{type: 'success'});
+                    $location.path("/armory");
+
+                  }, function errorCallback(response) {
+                    alert(response);
+                  });
+
+        };
+
 
     }).controller('notify', function ($scope) {
          UserService.getUserGifs().then(function (data) {

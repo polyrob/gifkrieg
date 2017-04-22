@@ -8,6 +8,7 @@ public class UserState {
     private int credits;
     private boolean hasSubmittedCurrent;
     private boolean hasVotedCurrent;
+    private int invSize;
 
 
     public int getCredits() {
@@ -32,5 +33,13 @@ public class UserState {
 
     public void setHasVotedCurrent(boolean hasVotedCurrent) {
         this.hasVotedCurrent = hasVotedCurrent;
+    }
+
+    public void setInvSize(int invSize) {
+        this.invSize = invSize;
+    }
+
+    public int getInvSize() {
+        return invSize;
     }
 }

@@ -15,6 +15,8 @@ angular.module('gifkrieg')
                 controllerAs: 'controller'
             }).when('/leaderboard', {
                 templateUrl: 'leaderboard.html'
+            }).when('/armory', {
+                templateUrl: 'armory.html'
             }).when('/submitGif', {
                 templateUrl: 'submitGif.html'
             }).when('/vote', {

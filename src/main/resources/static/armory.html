@@ -1,0 +1,26 @@
+<div class="container" ng-controller="armoryController as ac">
+
+    <div class="jumbotron">
+        <div class="text-center">
+            <h1>The Armory</h1>
+            <p class="lead">You have {{credits}} credits</p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4"><img class="gif-box-sm" ng-src="{{gif.url}}"/></div>
+    </div>
+
+    <div class="page-header"><h2>Get a Random GIF</h2></div>
+    <div>
+        <a ng-show="credits >= 10 && user.invSize > gifdeck.size" class="btn btn-lg btn-success" ng-click="getNewRandomGif()">Get
+            Random GIF</a>
+        <div ng-show="credits < 10" class="alert alert-warning" role="alert">You don't have enough credits.</div>
+        <div ng-show="user.invSize <= gifdeck.size" class="alert alert-warning" role="alert">You don't have room in
+            your deck.
+        </div>
+    </div>
+
+
+</div>

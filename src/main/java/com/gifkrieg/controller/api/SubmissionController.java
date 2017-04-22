@@ -1,7 +1,7 @@
 package com.gifkrieg.controller.api;
 
 import com.gifkrieg.constants.Defaults;
-import com.gifkrieg.data.CreditsRepository;
+import com.gifkrieg.data.UserDetailsRepository;
 import com.gifkrieg.exception.DuplicateRequestException;
 import com.gifkrieg.exception.GifAlreadySubmittedException;
 import com.gifkrieg.model.*;
@@ -40,7 +40,7 @@ public class SubmissionController {
     private UserService userService;
 
     @Autowired
-    private CreditsRepository creditsRepository;
+    private UserDetailsRepository creditsRepository;
 
     @Transactional
     @RequestMapping(path = "/submission/{challengeId}", method = RequestMethod.POST)

@@ -19,5 +19,7 @@ public class Defaults {
     public static final int CREDITS_FOR_SUBMISSION = 5;
     public static final int CREDITS_FOR_VOTE = 10;
 
+    public static final int CREDITS_PURCHASE_RANDOM_GIF = 10;
+
 }
 

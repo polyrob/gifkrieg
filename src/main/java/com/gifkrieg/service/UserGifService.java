@@ -16,4 +16,6 @@ public interface UserGifService {
     UserGif getUserGif(int userid, int gifId);
 
     void removeGifFromInventory(UserGif userGif);
+
+    Gif getNewRandomGif(int userId, List<UserGif> currentInventory);
 }

@@ -12,6 +12,10 @@ body{
     max-width: 300px;
 }
 
+.gif-box-sm {
+    max-width: 200px;
+    max-height: 200px;
+}
 
 .dropdown-menu > li.kopie > a {
     padding-left:5px;

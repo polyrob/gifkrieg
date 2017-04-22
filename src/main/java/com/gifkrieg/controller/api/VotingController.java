@@ -1,7 +1,7 @@
 package com.gifkrieg.controller.api;
 
 import com.gifkrieg.constants.Defaults;
-import com.gifkrieg.data.CreditsRepository;
+import com.gifkrieg.data.UserDetailsRepository;
 import com.gifkrieg.model.*;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
@@ -37,7 +37,7 @@ public class VotingController {
     private UserService userService;
 
     @Autowired
-    private CreditsRepository creditsRepository;
+    private UserDetailsRepository creditsRepository;
 
 
     @RequestMapping(path = "/challenge/{challengeId}", method = RequestMethod.GET)

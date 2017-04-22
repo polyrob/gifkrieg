@@ -9,9 +9,12 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js" type="text/javascript"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js" type="text/javascript"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js" type="text/javascript"></script>
+    <!--<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js" type="text/javascript"></script>-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-notify.min.js"></script>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.css" rel="stylesheet">
     <link href="css/gifkrieg.css" rel="stylesheet">
     <style type="text/css">
         [ng\:cloak],
@@ -49,11 +52,8 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
-                <li ng-show="authenticated" class="dropdown">
-                    <a href="#/mydeck" class="dropdown-toggle" data-toggle="dropdown" ng-mouseover="getUserGifs()">Your
-                        GIFs <b class="caret"></b></a>
-                </li>
+                <li ng-show="authenticated"><a href="#/mydeck">Your Deck</a></li>
+                <li ng-show="authenticated"><a href="#/armory">Armory</a></li>
                 <li ng-show="authenticated"><a href="/">Your Stats</a></li>
                 <!--<li ng-show="authenticated"><a href="/api/test">Test Api</a></li>-->
                 <!--<li ng-show="authenticated"><a href="/">Admin</a></li>-->

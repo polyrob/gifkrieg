@@ -2,10 +2,7 @@ package com.gifkrieg.service;
 
 
 import com.gifkrieg.constants.Defaults;
-import com.gifkrieg.data.GifRepository;
-import com.gifkrieg.data.RoleRepository;
-import com.gifkrieg.data.UserGifRepository;
-import com.gifkrieg.data.UserRepository;
+import com.gifkrieg.data.*;
 import com.gifkrieg.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +29,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserGifRepository userGifRepository;
     @Autowired
+    private UserDetailsRepository creditsRepository;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private Random random = new Random(System.currentTimeMillis());
@@ -49,6 +48,9 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         user.setActive(State.ACTIVE);
         userRepository.save(user);
+
+        // add to credits repository
+        creditsRepository.save(new UserDetails(user.getId(), 5));
     }
 
     @Override

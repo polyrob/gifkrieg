@@ -43,7 +43,6 @@ public class LoginController {
     @Autowired
     private UserValidator userValidator;
 
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result registration(@RequestBody User user) {
         log.debug("New Registration POST received.");
@@ -58,8 +57,9 @@ public class LoginController {
         securityService.autologin(user.getUsername(), user.getPasswordConfirm());
 
         // get starting gifs
-        user.setInventorySize(START_INVENTORY_SIZE);
+//        user.setInventorySize(START_INVENTORY_SIZE);
         userService.acquireStarterGifs(user);
+
 
         GKUserDetails gkUserDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return new Result("success", gkUserDetails);

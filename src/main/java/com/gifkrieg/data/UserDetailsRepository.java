@@ -1,23 +1,20 @@
 package com.gifkrieg.data;
 
-import com.gifkrieg.model.Credits;
-import com.gifkrieg.model.Score;
+import com.gifkrieg.model.UserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
  * Created by Rob on 4/2/2017.
  */
 
-@Repository("creditsRepository")
-public interface CreditsRepository extends JpaRepository<Credits, Long> {
+@Repository("userDetailsRepository")
+public interface UserDetailsRepository extends JpaRepository<UserDetails, Long> {
 
-    Credits findByUserId(int userId);
+    UserDetails findByUserId(int userId);
 
     @Modifying
     @Transactional

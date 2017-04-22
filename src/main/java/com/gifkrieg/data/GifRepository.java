@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Repository("gifRepository")
-public interface GifRepository extends JpaRepository<Gif, Long> {
+public interface GifRepository extends JpaRepository<Gif, Integer> {
 
     List<Gif> findByIdIn(Collection<Integer> idList);
     List<Gif> findAllByIdIn(List<Integer> idList);
