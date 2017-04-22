@@ -35,6 +35,8 @@ insert into user_role (user_id, role_id) values (9, 1)
 insert into user (active, email, password, username) values (6, "user8@gmail.com", "$2a$10$dUeWB1H9Zj78c.fQiQi1mOAmbJyvZc7NmMLW6lRNCpcJzU41puam2", "user8")
 insert into user_role (user_id, role_id) values (10, 1)
 
+-- Add credits
+insert into credits (user_id, credits) values (1, 10), (2,20), (3,25), (4,30),(5,35),(6,30),(7,5),(8,10)
 
 -- Create some challenges
 insert into challenge (state, card_text, start_time, end_time) values (6, "First Challenge Ever", "2017-04-01 00:00:00", "2017-04-02 00:00:00")

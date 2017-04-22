@@ -1,5 +1,7 @@
 package com.gifkrieg.controller.api;
 
+import com.gifkrieg.constants.Defaults;
+import com.gifkrieg.data.CreditsRepository;
 import com.gifkrieg.model.*;
 import com.gifkrieg.service.ChallengeService;
 import com.gifkrieg.service.SubmissionService;
@@ -34,6 +36,9 @@ public class VotingController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CreditsRepository creditsRepository;
+
 
     @RequestMapping(path = "/challenge/{challengeId}", method = RequestMethod.GET)
     public ResponseEntity getSubmissionsForVoting(@PathVariable int challengeId) {
@@ -59,9 +64,10 @@ public class VotingController {
 
         votingService.castVoteForSubmission(challengeId, gifId.getGifId(), userId);
 
-        // get a new gif for the user, if they have room in their inventory.
+        // give user credits for voting
+        creditsRepository.addCreditsForUser(userId, Defaults.CREDITS_FOR_VOTE);
 
-        return ResponseEntity.ok(new CreditsResponse(15));
+        return ResponseEntity.ok(new CreditsResponse(Defaults.CREDITS_FOR_VOTE));
     }
 
 }

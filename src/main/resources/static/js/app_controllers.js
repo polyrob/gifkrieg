@@ -163,7 +163,13 @@ angular.module('gifkrieg')
 
                     UserService.invalidateUserGifs();
                     $location.path("/");
-
+                    if (response.credits) {
+                        $rootScope.credits += response.credits;
+                        $.bootstrapGrowl(response.credits + ' credits received for submitting!',{
+                            type: 'success',
+                            delay: 4000,
+                        });
+                    }
 
                 },
                 function errorCallback(response) {

@@ -16,8 +16,8 @@ public class Defaults {
     public static final int POINTS_FOR_TOP_TEN_PERCENT = 5;
     public static final int POINTS_FOR_TOP_HALF = 2;
 
-    public static final int POINTS_FOR_SUBMISSION = 1;
-    public static final int POINTS_FOR_VOTE = 1;
+    public static final int CREDITS_FOR_SUBMISSION = 5;
+    public static final int CREDITS_FOR_VOTE = 10;
 
 }
 

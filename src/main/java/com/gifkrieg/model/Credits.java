@@ -14,6 +14,8 @@ public class Credits implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private int userId;
+
     @Column(columnDefinition="INT NOT NULL DEFAULT 0")
     private int credits;
 
@@ -24,6 +26,14 @@ public class Credits implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getCredits() {

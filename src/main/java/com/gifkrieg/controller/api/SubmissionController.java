@@ -1,5 +1,7 @@
 package com.gifkrieg.controller.api;
 
+import com.gifkrieg.constants.Defaults;
+import com.gifkrieg.data.CreditsRepository;
 import com.gifkrieg.exception.DuplicateRequestException;
 import com.gifkrieg.exception.GifAlreadySubmittedException;
 import com.gifkrieg.model.*;
@@ -37,19 +39,23 @@ public class SubmissionController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CreditsRepository creditsRepository;
+
     @Transactional
     @RequestMapping(path = "/submission/{challengeId}", method = RequestMethod.POST)
     public ResponseEntity postSubmission(@RequestBody PostSubmissionBody body, @PathVariable int challengeId) {
         log.debug("postSubmission method called");
 
         GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        int userId = userDetails.getUserId();
 
         Challenge challenge = challengeService.getCurrentChallenge();
         if (challenge.getId() != challengeId) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid.challenge");
         }
 
-        UserGif ug = userGifService.getUserGif(userDetails.getUserId(), body.getGifId());
+        UserGif ug = userGifService.getUserGif(userId, body.getGifId());
         if (ug == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("gif.invalid");
         }
@@ -57,7 +63,7 @@ public class SubmissionController {
         // necessary? not scalable solution
         synchronized (userDetails.getUsername()) {
             try {
-                submissionService.submitSubmission(challengeId, body.getGifId(), userDetails.getUserId());
+                submissionService.submitSubmission(challengeId, body.getGifId(), userId);
             } catch (DuplicateRequestException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("You've already submitted for this challenge. You shouldn't be here.");
@@ -72,7 +78,12 @@ public class SubmissionController {
         // update stats / counters
         // TODO: maybe this would good for rabbitmq
 
-        return ResponseEntity.ok("Submission accepted.");
+        // give credits for submitting
+
+        // give user credits for voting
+        creditsRepository.addCreditsForUser(userId, Defaults.CREDITS_FOR_SUBMISSION);
+
+        return ResponseEntity.ok(new CreditsResponse(Defaults.CREDITS_FOR_SUBMISSION));
     }
 
 
