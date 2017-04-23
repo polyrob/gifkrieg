@@ -7,12 +7,18 @@
         </div>
     </div>
 
-
+    <div class="page-header"><h2>Your GIFs</h2>
+    </div>
     <div class="row">
-        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4"><img class="gif-box-sm" ng-src="{{gif.url}}"/></div>
+        <div ng-repeat="gif in gifdeck" class="col-xs-6 col-md-4">
+            <img class="gif-box-sm" ng-src="{{gif.url}}"/>
+            <a class="btn btn-lg btn-info" ng-click="discard(gif)">Discard</a>
+        </div>
     </div>
 
-    <div class="page-header"><h2>Get a Random GIF</h2></div>
+    <div class="page-header"><h2>Get a Random GIF</h2>
+        <p>10 credits</p>
+    </div>
     <div>
         <a ng-show="credits >= 10 && user.invSize > gifdeck.size" class="btn btn-lg btn-success" ng-click="getNewRandomGif()">Get
             Random GIF</a>

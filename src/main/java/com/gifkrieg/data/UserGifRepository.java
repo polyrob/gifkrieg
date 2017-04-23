@@ -3,8 +3,10 @@ package com.gifkrieg.data;
 import com.gifkrieg.model.Score;
 import com.gifkrieg.model.UserGif;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,4 +21,7 @@ public interface UserGifRepository extends JpaRepository<UserGif, Long> {
 
     UserGif findByUserIdAndGifId(int userId, int gifId);
 
+    @Modifying
+    @Transactional
+    void deleteByUserIdAndGifId(int userId, int gifId);
 }

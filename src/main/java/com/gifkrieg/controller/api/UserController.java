@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -71,8 +72,16 @@ public class UserController {
         }
 
         Gif newOne = userGifService.getNewRandomGif(userDetails.getUserId(), userGifs);
+        userDetailsRepository.subtractCreditsForUser(userDetails.getUserId(), Defaults.CREDITS_PURCHASE_RANDOM_GIF);
 
         return ResponseEntity.ok(newOne);
+    }
+
+    @RequestMapping(path = "/user/gifs/{gifId}", method = RequestMethod.DELETE)
+    public ResponseEntity discardGif(@PathVariable int gifId) {
+        GKUserDetails userDetails = (GKUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userGifService.discardGif(userDetails.getUserId(), gifId);
+        return ResponseEntity.ok("gif deleted");
     }
 
     @RequestMapping(path = "/user", method = RequestMethod.GET)

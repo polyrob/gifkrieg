@@ -58,5 +58,10 @@ public class UserGifServiceImpl implements UserGifService {
         }
     }
 
+    @Override
+    public void discardGif(int userId, int gifId) {
+        userGifRepository.deleteByUserIdAndGifId(userId, gifId);
+    }
+
 
 }

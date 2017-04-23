@@ -18,4 +18,6 @@ public interface UserGifService {
     void removeGifFromInventory(UserGif userGif);
 
     Gif getNewRandomGif(int userId, List<UserGif> currentInventory);
+
+    void discardGif(int userId, int gifId);
 }

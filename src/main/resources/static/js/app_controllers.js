@@ -215,7 +215,7 @@ angular.module('gifkrieg')
             $scope.gifdeck = data;
         });
 
-    }).controller('armoryController', function ($rootScope, $scope, $http, $location, UserService) {
+    }).controller('armoryController', function ($rootScope, $scope, $http, $route, UserService) {
         UserService.getUserGifs().then(function (data) {
             $scope.gifdeck = data;
             $scope.gifdeck.size = data.length;
@@ -237,12 +237,30 @@ angular.module('gifkrieg')
                     $.notify({
                         message: "You've received a new GIF! <img class=\"gif-box-sm\" src=\"" + response.data.url + "\"/>"
                     },{type: 'success'});
-                    $location.path("/armory");
+                    $route.reload();
 
                   }, function errorCallback(response) {
                     alert(response);
                   });
+        };
 
+        $scope.discard = function (gif) {
+            console.log("discarding gif " + gif);
+            $http({
+                    method: 'DELETE',
+                    url: 'api/user/gifs/' + gif.id,
+                })
+                .then(function successCallback(response) {
+                    UserService.invalidateUserState();
+                    UserService.invalidateUserGifs();
+                    $.notify({
+                        message: "Gif discarded."
+                    },{type: 'warning'});
+                    $route.reload();
+
+                  }, function errorCallback(response) {
+                    alert(response);
+                  });
         };
 
 
